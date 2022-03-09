@@ -81,9 +81,14 @@ module.exports = {
     "author": "hujunjie",
     "authorAvatar": "/avatar.jpeg",
     "record": "沪ICP备 2022003331 号",
-    "startYear": "2021"
+    "startYear": "2021",
+    "valineConfig": {
+        "appId": "9dl7DeiOQ2DmQoIcai3UC6dR-gzGzoHsz", 
+        "appKey": "kisH4g4RCIHn0064CXERJktf"
+    }
+    
   },
   "markdown": {
     "lineNumbers": true
-  }
+  }, 
 }
