@@ -1,0 +1,32 @@
+name: deploying vuepress project to server
+on:
+  push:
+    branches:
+      - master # main 分支有 push 行为时就触发这个 action
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@master
+
+      - name: Build
+        uses: jenkey2011/vuepress-deploy@master
+        env:
+          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+          TARGET_REPO: 12306hujunjie/blog
+          TARGET_BRANCH: gh_pages
+          BUILD_SCRIPT: yarn && yarn build
+          BUILD_DIR: ./public
+
+      - name: Deploy to Server
+        uses: easingthemes/ssh-deploy@main
+        env:
+            SSH_PRIVATE_KEY: ${{ secrets.DEPLOY_KEY }}
+            ARGS: -rltgoDzvO --delete
+            SOURCE: ./public/
+            REMOTE_HOST: ${{ secrets.SSH_HOST }}
+            REMOTE_USER: ${{ secrets.SSH_USRNAME }}
+            TARGET: /project/blog
+            EXCLUDE: 
