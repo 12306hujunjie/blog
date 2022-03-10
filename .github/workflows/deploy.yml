@@ -6,7 +6,7 @@ on:
 
 jobs:
   build-and-deploy:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     steps:
       - name: Checkout
         uses: actions/checkout@master
@@ -28,5 +28,5 @@ jobs:
             SOURCE: ./public/
             REMOTE_HOST: ${{ secrets.SSH_HOST }}
             REMOTE_USER: ${{ secrets.SSH_USRNAME }}
-            TARGET: /project/blog
+            TARGET: /project/blog/static
             EXCLUDE: 
