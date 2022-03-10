@@ -43,8 +43,8 @@ module.exports = {
       },
       {
         "text": "github",
-          "icon": "reco-github",
-          "link": "https://github.com/12306hujunjie",
+        "icon": "reco-github",
+        "link": "https://github.com/12306hujunjie",
       }
     ],
     "sidebar": {
