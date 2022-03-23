@@ -11,22 +11,56 @@ jobs:
       - name: Checkout
         uses: actions/checkout@master
 
-      - name: Build
+      - name: Build static files
         uses: jenkey2011/vuepress-deploy@master
         env:
-          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+          ACCESS_TOKEN: ${{ github.token }}
           TARGET_REPO: 12306hujunjie/blog
           TARGET_BRANCH: gh_pages
           BUILD_SCRIPT: yarn && yarn build
           BUILD_DIR: ./public
+      # - name: Deploy to Server
+      #   uses: easingthemes/ssh-deploy@main
+      #   env:
+      #       SSH_PRIVATE_KEY: ${{ secrets.DEPLOY_KEY }}
+      #       ARGS: -rltgoDzvO --delete
+      #       SOURCE: ./public/
+      #       REMOTE_HOST: ${{ secrets.SSH_HOST }}
+      #       REMOTE_USER: ${{ secrets.SSH_USRNAME }}
+      #       TARGET: /root/project/blog/static
+      #       EXCLUDE: 
+      - name: set up qemu
+        uses: docker/setup-qemu-action@v1
 
-      - name: Deploy to Server
-        uses: easingthemes/ssh-deploy@main
-        env:
-            SSH_PRIVATE_KEY: ${{ secrets.DEPLOY_KEY }}
-            ARGS: -rltgoDzvO --delete
-            SOURCE: ./public/
-            REMOTE_HOST: ${{ secrets.SSH_HOST }}
-            REMOTE_USER: ${{ secrets.SSH_USRNAME }}
-            TARGET: /project/blog/static
-            EXCLUDE: 
+      - name: set up docker buildx
+        uses: docker/setup-buildx-action@v1
+    
+      - name: login to aliyun
+        uses: docker/login-action@v1
+        with:
+          registry: registry.cn-hangzhou.aliyuncs.com/uther-cms/blog
+          username: ${{ secrets.REGISTRY_USERNAME }}
+          password: ${{ secrets.REGISTRY_PASSWORD }}
+      
+      - name: build and push
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          platforms: linux/amd64
+          push: true
+          tags: registry.cn-hangzhou.aliyuncs.com/uther-cms/blog:${{ github.sha }}
+
+      - name: deploy
+        uses: glopezep/helm@v1.7.1
+        with:
+          release: my-blog
+          namespace: default
+          chart: helm-chart
+          version: ${{ github.sha }}
+          token: ${{ github.token }}
+          helm: helm3
+          values: |
+            image:
+              tag: ${{ github.sha }}
+        env: 
+          KUBECONFIG_FILE: ${{ secrets.KUBECONFIG }}

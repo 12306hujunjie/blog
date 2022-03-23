@@ -119,3 +119,7 @@ WantedBy=multi-user.target
 `flannel.alpha.coreos.com/public-ip-overwrite: server-public-ip`
 
 至此就完成了:tada:
+
+kubectl run dig --rm -it --image=rickiechina/dig --overrides='{"spec": {"nodeSelector": { "kubernetes.io/hostname": "k3s-worker1" }}}' -- /bin/sh
+curl -sfL <http://rancher-mirror.cnrancher.com/k3s/k3s-install.sh> | INSTALL_K3S_MIRROR=cn sh  -s -  --node-external-ip 121.5.154.166 --advertise-address 121.5.154.166 --node-ip 10.0.4.10
+
