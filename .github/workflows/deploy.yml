@@ -56,7 +56,7 @@ jobs:
         run: |
           mv ./helm-chart/Chart.yaml ./helm-chart/Chart.old.yaml &&
           cat ./helm-chart/Chart.old.yaml | grep -v appVersion > ./helm-chart/Chart.yaml &&
-          echo -e "\r\nappVersion: ${steps.date.outputs.date}\r\n" >> ./helm-chart/Chart.yaml &&
+          echo -e "\r\nappVersion: v${steps.date.outputs.date##*/}\r\n" >> ./helm-chart/Chart.yaml &&
           cat ./helm-chart/Chart.yaml
 
       - name: Deploy
