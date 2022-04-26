@@ -54,8 +54,8 @@ jobs:
 
       - name: Prep helm chart
         run: |
-          sed -i " s/^version:.*$/version: $( steps.date.outputs.date ) / " chart/Chart.yaml
-          sed -i " s/^appVersion:.*$/appVersion: $( steps.date.outputs.date ) / " chart /Chart.yaml
+          sed -i " s/^version:.*$/version: ${{ steps.date.outputs.date }} / " helm-chart/Chart.yaml
+          sed -i " s/^appVersion:.*$/appVersion: ${{ steps.date.outputs.date }} / " helm-chart/Chart.yaml
 
       - name: Deploy
         uses: WyriHaximus/github-action-helm3@v2
