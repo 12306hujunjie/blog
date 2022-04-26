@@ -10,6 +10,9 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@master
+      - name: Get current date
+        id: date
+        run: echo "::set-output name=date::$(date +'%Y-%m-%dT%H:%M:%S')"
 
       - name: Build static files
         uses: jenkey2011/vuepress-deploy@master
@@ -29,9 +32,6 @@ jobs:
       #       REMOTE_USER: ${{ secrets.SSH_USRNAME }}
       #       TARGET: /root/project/blog/static
       #       EXCLUDE: 
-      - name: set up qemu
-        uses: docker/setup-qemu-action@v1
-
       - name: set up docker buildx
         uses: docker/setup-buildx-action@v1
     
@@ -49,18 +49,33 @@ jobs:
           platforms: linux/amd64
           push: true
           tags: registry.cn-hangzhou.aliyuncs.com/uther-cms/blog:${{ github.sha }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
 
-      - name: deploy
-        uses: glopezep/helm@v1.7.1
+      - name: Prep helm chart
+        run: |
+          mv ./helm-chart/Chart.yaml ./helm-chart/Chart.old.yaml &&
+          cat ./helm-chart/Chart.old.yaml | grep -v appVersion > ./helm-chart/Chart.yaml &&
+          echo -e "\r\nappVersion: ${steps.date.outputs.date}\r\n" >> ./helm-chart/Chart.yaml &&
+          cat ./helm-chart/Chart.yaml
+
+      - name: Deploy
+        uses: WyriHaximus/github-action-helm3@v2
         with:
-          release: my-blog
-          namespace: default
-          chart: helm-chart
-          version: ${{ github.sha }}
-          token: ${{ github.token }}
-          helm: helm3
-          values: |
-            image:
-              tag: ${{ github.sha }}
-        env: 
-          KUBECONFIG_FILE: ${{ secrets.KUBECONFIG }}
+          exec: helm upgrade my-blog ./helm-chart/ --install --wait --atomic --namespace=default --set=image.tag=${{ github.sha }}
+          kubeconfig: "${{ secrets.KUBECONFIG }}"
+
+      # - name: deploy
+      #   uses: glopezep/helm@v1.7.1
+      #   with:
+      #     release: my-blog
+      #     namespace: default
+      #     chart: helm-chart
+      #     version: ${{ github.sha }}
+      #     token: ${{ github.token }}
+      #     helm: helm3
+      #     values: |
+      #       image:
+      #         tag: ${{ github.sha }}
+      #   env: 
+      #     KUBECONFIG_FILE: ${{ secrets.KUBECONFIG }}
