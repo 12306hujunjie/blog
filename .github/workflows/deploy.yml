@@ -3,11 +3,6 @@ on:
   push:
     branches:
       - master # main 分支有 push 行为时就触发这个 action
-    paths:
-      - 'blogs/**'
-      - 'helm-chart/**'
-      - 'docs/**'
-      - '.vuepress/**'
 
 jobs:
   build-and-deploy:
@@ -22,14 +17,27 @@ jobs:
           echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
           echo "::set-output name=date::$(date +'%Y%m%dT')"
 
+      - uses: actions/cache@v2
+        id: yarn-cache 
+        with:
+          path: '**/node_modules'
+          key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
+
+      - name: Install packages
+        if: steps.yarn-cache.outputs.cache-hit != 'true'
+        run: yarn install 
+
       - name: Build static files
-        uses: jenkey2011/vuepress-deploy@master
-        env:
-          ACCESS_TOKEN: ${{ github.token }}
-          TARGET_REPO: 12306hujunjie/blog
-          TARGET_BRANCH: gh_pages
-          BUILD_SCRIPT: yarn && yarn build
-          BUILD_DIR: ./public
+        uses: yarn build
+
+      # - name: Build static files
+      #   uses: jenkey2011/vuepress-deploy@master
+      #   env:
+      #     ACCESS_TOKEN: ${{ github.token }}
+      #     TARGET_REPO: 12306hujunjie/blog
+      #     TARGET_BRANCH: gh_pages
+      #     BUILD_SCRIPT: yarn && yarn build
+      #     BUILD_DIR: ./public
       # - name: Deploy to Server
       #   uses: easingthemes/ssh-deploy@main
       #   env:
