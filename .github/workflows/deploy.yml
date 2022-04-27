@@ -3,6 +3,11 @@ on:
   push:
     branches:
       - master # main 分支有 push 行为时就触发这个 action
+    paths:
+      - 'blogs/**'
+      - 'helm-chart/**'
+      - 'docs/**'
+      - '.vuepress/**'
 
 jobs:
   build-and-deploy:
@@ -41,7 +46,7 @@ jobs:
       - name: login to aliyun
         uses: docker/login-action@v1
         with:
-          registry: registry.cn-hangzhou.aliyuncs.com/uther-cms/blog
+          registry: registry.cn-hangzhou.aliyuncs.com
           username: ${{ secrets.REGISTRY_USERNAME }}
           password: ${{ secrets.REGISTRY_PASSWORD }}
       
