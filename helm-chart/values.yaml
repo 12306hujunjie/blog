@@ -68,8 +68,8 @@ resources:
      cpu: 500m
      memory: 200Mi
    requests:
-     cpu: 4m
-     memory: 20Mi
+     cpu: 1m
+     memory: 4Mi
 
 web:
   volumes: []
