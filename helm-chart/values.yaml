@@ -68,8 +68,8 @@ resources:
      cpu: 500m
      memory: 200Mi
    requests:
-     cpu: 1m
-     memory: 1Mi
+     cpu: 4m
+     memory: 20Mi
 
 web:
   volumes: []
@@ -95,10 +95,10 @@ web:
 
 autoscaling:
   enabled: true
-  minReplicas: 2
-  maxReplicas: 4
-  targetCPUUtilizationPercentage: 80
-  # targetMemoryUtilizationPercentage: 80
+  minReplicas: 1
+  maxReplicas: 10
+  targetCPUUtilizationPercentage: 50
+  targetMemoryUtilizationPercentage: 50
 
 nodeSelector: {}
 
