@@ -17,6 +17,9 @@ jobs:
           echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
           echo "::set-output name=date::$(date +'%Y%m%dT')"
 
+      - name: set up docker buildx
+        uses: docker/setup-buildx-action@v1
+
       - uses: actions/cache@v2
         id: yarn-cache 
         with:
@@ -48,8 +51,6 @@ jobs:
       #       REMOTE_USER: ${{ secrets.SSH_USRNAME }}
       #       TARGET: /root/project/blog/static
       #       EXCLUDE: 
-      - name: set up docker buildx
-        uses: docker/setup-buildx-action@v1
     
       - name: login to aliyun
         uses: docker/login-action@v1
@@ -78,18 +79,3 @@ jobs:
         with:
           exec: helm upgrade my-blog ./helm-chart/ --install --wait --atomic --namespace=default --set=image.tag=${{ github.sha }}
           kubeconfig: "${{ secrets.KUBECONFIG }}"
-
-      # - name: deploy
-      #   uses: glopezep/helm@v1.7.1
-      #   with:
-      #     release: my-blog
-      #     namespace: default
-      #     chart: helm-chart
-      #     version: ${{ github.sha }}
-      #     token: ${{ github.token }}
-      #     helm: helm3
-      #     values: |
-      #       image:
-      #         tag: ${{ github.sha }}
-      #   env: 
-      #     KUBECONFIG_FILE: ${{ secrets.KUBECONFIG }}
