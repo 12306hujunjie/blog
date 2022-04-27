@@ -28,7 +28,7 @@ jobs:
         run: yarn install 
 
       - name: Build static files
-        uses: yarn build
+        run: yarn build
 
       # - name: Build static files
       #   uses: jenkey2011/vuepress-deploy@master
