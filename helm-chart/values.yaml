@@ -47,15 +47,15 @@ ingress:
   annotations: 
     traefik.ingress.kubernetes.io/redirect-entry-point: https
     traefik.ingress.kubernetes.io/custom-response-headers: "Access-Control-Allow-Origin:*||Access-Control-Allow-Methods:GET,POST,OPTIONS||Access-Control-Allow-Headers:DNT,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range||Access-Control-Expose-Headers:Content-Length,Content-Range"
-    # kubernetes.io/ingress.class: nginx
-    # kubernetes.io/tls-acme: "true"
+    cert-manager.io/cluster-issuer: letsencrypt-issuer
+    kubernetes.io/tls-acme: "true"
   hosts:
     - host: www.hujunjie.site
       paths:
         - path: /
           pathType: Prefix
   tls: 
-   - secretName: hujunjie-site
+   - secretName: hujunjie-site-tls
      hosts:
        -  www.hujunjie.site
 
