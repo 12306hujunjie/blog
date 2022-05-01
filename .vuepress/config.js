@@ -67,12 +67,13 @@ module.exports = {
       }
     },
     "friendLink": [
-      {
-        "title": "午后南杂",
-        "desc": "Enjoy when you can, and endure when you must.",
-        "email": "1156743527@qq.com",
-        "link": "https://www.recoluan.com"
-      },
+      // {
+      //   "title": "午后南杂",
+      //   "logo": "/recoluan_logo.png",
+      //   "desc": "Enjoy when you can, and endure when you must.",
+      //   "email": "1156743527@qq.com",
+      //   "link": "https://www.recoluan.com"
+      // },
     ],
     "logo": "/logo.png",
     "search": true,
