@@ -1,15 +1,12 @@
 ---
-title: k8s 和 k3s 入口流量分析
+title: k8s 使用小tip
 date: 2022-01-03
 tags:
  - k8s
- - best-practice
- - k8s-from-scratch
 categories:
  - cloud-base
 sidebar: auto
 ---
-
 
 ::: tip  
 可以用dig查看dns解析是否成功  
