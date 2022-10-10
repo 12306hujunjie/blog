@@ -17,7 +17,7 @@ sidebar: auto
 随着毎轮交换，有序序区自右向左不断增加，需要循环的无序区则不断减少，直至最后一位，交换结束
 :::
 
-```python3
+```python3 []
 def bubble_sort(li):
     for i in range(len(li) - 1):   # 从第 0 趟开始，一共交换列表的长度 - 1趟，即到下标为列表的最后一个元素的前一个元素停止(range函数左开右闭)
         for j in range(len(li) - 1 - i):  # 第 0 趟的时候, 无序区就是整个列表，j 为交换元素的指针
@@ -29,6 +29,19 @@ random.shuffle(li)
 print(li)
 bubble_sort(li)
 print(li)
+```
+``` golang []
+func bubbleSort(li []int) []int{
+    for i:=0;i<len(li)-1;i++{
+        for j:=0;j<len(li)-1-i;j++{
+            if li[j] > li[j+1] {
+                li[j], li[j+1] = li[j+1], li[j]
+            }
+        }
+    }
+    return li
+}
+
 ```
 
 #### 2. 插入排序
