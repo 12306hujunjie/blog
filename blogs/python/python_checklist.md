@@ -2,8 +2,7 @@
 title: python checklist
 date: 2019-06-03
 tags:
- - best-practice
- - python
+ - 最佳实践
  - checklist
 categories: 
  - python

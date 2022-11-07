@@ -3,9 +3,9 @@ title: k3s(轻量级k8s)部署
 date: 2022-01-03
 tags:
  - k3s
- - best-practice
+ - 最佳实践
 categories:
- - cloud-base
+ - 云原生
 sidebar: auto
 ---
 ## 一、准备工作

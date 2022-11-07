@@ -4,7 +4,7 @@ date: 2022-01-03
 tags:
  - k8s
 categories:
- - cloud-base
+ - 云原生
 sidebar: auto
 ---
 

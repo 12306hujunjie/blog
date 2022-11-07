@@ -2,10 +2,9 @@
 title: 常用排序算法简析
 date: 2022-03-01
 tags:
- - algorithm
- - bubble-sort
+ - 排序
 categories: 
- - algorithm
+ - 算法
 sidebar: auto
 ---
 ### lowb三人组算法

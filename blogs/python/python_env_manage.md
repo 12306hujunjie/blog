@@ -2,9 +2,8 @@
 title: python 环境管理
 date: 2020-2-17
 tags:
- - env
- - best-practice
- - python
+ - 环境管理
+ - 最佳实践
  - poetry
 categories: 
  - python

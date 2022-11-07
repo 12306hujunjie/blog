@@ -2,10 +2,9 @@
 title: 缓存模式设计与实践
 date: 2022-03-01
 tags:
- - best-practice
- - cache
+ - 最佳实践
 categories: 
- - cache
+ - 缓存
 sidebar: auto
 ---
 # 缓存主要有以下几种模式
