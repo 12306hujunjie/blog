@@ -1,16 +1,17 @@
 {
-  "name": "blog",
-  "version": "1.0.0",
-  "author": "12306hujunjie <545512690@qq.com>",
+  "name": "vuepress-theme-reco-demo",
+  "version": "2.0.0",
+  "description": "Demo for vuepress-theme-reco@2.x.",
+  "repository": "git@github.com:recoluan/vuepress-theme-reco-demo.git",
+  "author": "reco_luan <recoluan@outlook.com>",
   "license": "MIT",
   "scripts": {
-    "dev": "vuepress dev docs --open --host \"localhost\"",
-    "build": "vuepress build docs"
+    "dev": "vuepress dev src",
+    "start": "vuepress dev src",
+    "build": "vuepress build src"
   },
-  "devDependencies": {
-    "vuepress": "^1.9.7",
-    "vuepress-plugin-comment": "^0.7.3",
-    "vuepress-theme-reco": "1.6.10"
-  },
-  "description": "study anything and life record"
+  "dependencies": {
+    "vuepress": "2.0.0-beta.51",
+    "vuepress-theme-reco": "2.0.0-beta.41"
+  }
 }
