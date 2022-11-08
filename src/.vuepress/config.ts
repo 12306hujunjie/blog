@@ -16,7 +16,7 @@ export default defineUserConfig({
     docsRepo: 'https://github.com/12306hujunjie/blog',
     docsBranch: 'master',
     docsDir: 'src',
-    lastUpdatedText: '最新更新于',
+    lastUpdatedText: '更新于',
     autoSetBlogCategories: true,         // 自动设置分类
     autoAddCategoryToNavbar: true,  // 自动将首页、分类和标签添加至头部导航条
     catalogTitle: '目录',
