@@ -34,7 +34,8 @@ print(li)
 ```
 :::  
 ::: code-group-item golang  
-``` golang
+```golang
+package main
 func bubbleSort(li []int) []int{
     for i:=0;i<len(li)-1;i++{
         for j:=0;j<len(li)-1-i;j++{
