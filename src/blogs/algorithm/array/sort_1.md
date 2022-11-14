@@ -47,7 +47,21 @@ func bubbleSort(li []int) []int{
     return li
 }
 ```
-:::  
+:::
+::: code-group-item ts
+```ts
+function bubbleSort(li:number[]): number[] {
+    for (let i = 0; i < li.length-1; i++) {
+        for (let j = 0; j < li.length - i - 1; j++) {
+            if(li[j] > li[j+1]){
+                [li[j], li[j+1]] = [li[j+1], li[j]]
+            }
+        }
+    }
+}
+console.log(bubbleSort([5,4,3,2,1]))
+```
+:::
 ::::  
 
 ### 2. 插入排序
@@ -63,6 +77,11 @@ def insert_sort(li):
             li[j+1] = li[j]
             j -= 1
         li[j + 1] = tmp
+```
+:::
+::: code-group-item golang
+```golang
+
 ```
 :::
 ::::
