@@ -3,7 +3,6 @@
 
 import recoTheme from 'vuepress-theme-reco'
 import {defineUserConfig} from "vuepress";
-import {googleAnalyticsPlugin} from "@vuepress/plugin-google-analytics";
 
 export default defineUserConfig({
   title: 'database of memory',
@@ -63,10 +62,5 @@ export default defineUserConfig({
           },
         ],
   }),
-  plugins: [
-      googleAnalyticsPlugin({
-        id: "G-6XKXLWGWV7"
-      }),
-  ]
   // debug: true,
 })
