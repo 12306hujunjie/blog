@@ -88,8 +88,8 @@ a = a if a <= x else ~(a ^ x)    # 负数 32位以上取反， 1至32位不变
 print(a)
 ```
 :::  
-::: code-group-item golang  
-```golang
+::: code-group-item go  
+```go
 func add(a int, b int) int {
     for b != 0 {
         carry := (a & b) << 1
@@ -129,8 +129,8 @@ class Solution:
         return [x, y]
 ```
 :::
-::: code-group-item golang
-```golang
+::: code-group-item go
+```go
 func singleNumbers(nums []int) []int {
 	tmp := 0
 	for _, num := range nums {

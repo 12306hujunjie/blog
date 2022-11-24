@@ -1,9 +1,9 @@
 
 // .vuepress/config.ts
 
-import { defineUserConfig } from 'vuepress'
-import type { DefaultThemeOptions } from 'vuepress'
 import recoTheme from 'vuepress-theme-reco'
+import {defineUserConfig} from "vuepress";
+import {googleAnalyticsPlugin} from "@vuepress/plugin-google-analytics";
 
 export default defineUserConfig({
   title: 'database of memory',
@@ -25,11 +25,13 @@ export default defineUserConfig({
       options: {
         "appId": "9dl7DeiOQ2DmQoIcai3UC6dR-gzGzoHsz",
         "appKey": "kisH4g4RCIHn0064CXERJktf",
-        placeholder: '填写邮箱可以收到回复提醒哦！',
-        verify: true, // 验证码服务
+        placeholder: 'Leave a comment',
+        // verify: true, // 验证码服务
         // notify: true,
-        recordIP: true,
+        // recordIP: true,
         // hideComments: true // 隐藏评论
+        visitor: false,
+        recordIp: true
       },
     },
     // series 为原 sidebar
@@ -45,10 +47,13 @@ export default defineUserConfig({
         }
       ]
     },
+
     navbar:
         [
           // { text: 'Home', link: '/' },
-          // { text: 'Categories', link: '/categories/reco/1/' },
+          // { text: 'Categories', link: '/blogs/',children: [
+          //     {text: "算法", link: '/blogs/algorithm'},
+          //   ]},
           // { text: 'Tags', link: '/tags/tag1/1/' },
           { text: 'Docs',
             children: [
@@ -58,5 +63,10 @@ export default defineUserConfig({
           },
         ],
   }),
+  plugins: [
+      googleAnalyticsPlugin({
+        id: "G-6XKXLWGWV7"
+      })
+  ]
   // debug: true,
 })
