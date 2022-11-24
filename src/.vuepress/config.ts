@@ -66,7 +66,7 @@ export default defineUserConfig({
   plugins: [
       googleAnalyticsPlugin({
         id: "G-6XKXLWGWV7"
-      })
+      }),
   ]
   // debug: true,
 })
