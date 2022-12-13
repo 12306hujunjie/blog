@@ -35,10 +35,12 @@ export default defineUserConfig({
     },
     // series 为原 sidebar
     series: {
-      '/docs/theme-reco/': [
+      '/docs/leetcode/': [
         {
-          text: 'module one',
-          children: ['home', 'theme']
+          text: '从零开始刷题之路',
+          children: [{
+            text: '方法论', link : "the_way_to_leetcode"
+          }, 'theme']
         },
         {
           text: 'module two',
@@ -55,8 +57,9 @@ export default defineUserConfig({
           //   ]},
           // { text: 'Tags', link: '/tags/tag1/1/' },
           { text: 'Docs',
+            link: '/docs/',
             children: [
-              { text: 'vuepress-reco', link: '/docs/theme-reco/theme' },
+              { text: 'leetcode from scratch', link: '/docs/leetcode/' },
               { text: 'vuepress-theme-reco', link: '/blogs/other/guide' }
             ]
           },
