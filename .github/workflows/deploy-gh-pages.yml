@@ -30,13 +30,13 @@ jobs:
         run: npm ci
 
       - name: Build VuePress site
-        run: npm run docs:build
+        run: npm run build
 
       - name: Deploy to gh_pages branch
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./docs/.vuepress/dist
+          publish_dir: ./src/.vuepress/dist
           publish_branch: gh_pages
           user_name: 'github-actions[bot]'
           user_email: 'github-actions[bot]@users.noreply.github.com'
