@@ -1,1 +1,0 @@
-const e=JSON.parse('{"key":"v-270ef065","path":"/categories/yunyuansheng/1/","title":"","lang":"en-US","frontmatter":{"layout":"Categories"},"excerpt":"","headers":[],"git":{},"filePathRelative":null}');export{e as data};
