@@ -3,12 +3,14 @@
 
 import recoTheme from 'vuepress-theme-reco'
 import {defineUserConfig} from "vuepress";
+import { viteBundler } from '@vuepress/bundler-vite'
 
 export default defineUserConfig({
+  bundler: viteBundler(), 
   title: 'database of memory',
   description: 'study anything and life record',
   theme: recoTheme({
-    style: '@vuepress-reco/style-default',
+    // style: '@vuepress-reco/style-default',
     logo: '/logo.png',
     author: "hujunjie",
     authorAvatar: "/avatar.jpeg",
