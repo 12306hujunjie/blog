@@ -1,0 +1,1 @@
+const e=JSON.parse('{"key":"v-3923c42e","path":"/tags/xunihua/1/","title":"","lang":"en-US","frontmatter":{"layout":"Categories"},"excerpt":"","headers":[],"git":{},"filePathRelative":null}');export{e as data};

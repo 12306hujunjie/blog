@@ -1,0 +1,1 @@
+import{_ as t,o as n,c as o,a as r}from"./app.05a3b675.js";const s={};function c(l,e){return n(),o("div",null,e[0]||(e[0]=[r("p",null,"This is theme-reco.",-1)]))}const _=t(s,[["render",c],["__file","index.html.vue"]]);export{_ as default};
