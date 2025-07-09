@@ -3,7 +3,9 @@ title: 缓存模式设计与实践
 date: 2022-03-01
 tags:
  - 最佳实践
-categories: 
+categories:
+ - 缓存
+ - 设计模式
  - 缓存
 sidebar: auto
 ---
