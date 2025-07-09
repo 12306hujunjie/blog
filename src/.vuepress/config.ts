@@ -6,6 +6,7 @@ import {defineUserConfig} from "vuepress";
 import { viteBundler } from '@vuepress/bundler-vite'
 
 export default defineUserConfig({
+  base: '/blog/',
   bundler: viteBundler(), 
   title: 'database of memory',
   description: 'study anything and life record',
