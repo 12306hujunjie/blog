@@ -6,7 +6,7 @@ import {defineUserConfig} from "vuepress";
 import { viteBundler } from '@vuepress/bundler-vite'
 
 export default defineUserConfig({
-  base: '/blog/',
+  base: process.env.NODE_ENV === 'production' ? '/blog/' : '/',
   bundler: viteBundler(), 
   title: 'database of memory',
   description: 'study anything and life record',
@@ -59,6 +59,7 @@ export default defineUserConfig({
           //     {text: "算法", link: '/blogs/algorithm'},
           //   ]},
           // { text: 'Tags', link: '/tags/tag1/1/' },
+          { text: '知识地图', link: '/knowledge-map/' },
           { text: 'Docs',
             link: '/docs/',
             children: [

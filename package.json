@@ -6,14 +6,17 @@
   "author": "reco_luan <recoluan@outlook.com>",
   "license": "MIT",
   "scripts": {
-    "dev": "vuepress dev src",
+    "dev": "node src/.vuepress/scripts/generateKnowledgeData.js && vuepress dev src",
     "start": "vuepress dev src",
-    "build": "vuepress build src"
+    "build": "NODE_ENV=production node src/.vuepress/scripts/generateKnowledgeData.js && NODE_ENV=production vuepress build src",
+    "prebuild": "node src/.vuepress/scripts/generateKnowledgeData.js",
+    "generate-knowledge": "node src/.vuepress/scripts/generateKnowledgeData.js"
   },
   "dependencies": {
     "@vuepress/bundler-webpack": "2.0.0-rc.19",
     "vuepress": "2.0.0-rc.19",
     "vuepress-theme-reco": "2.0.0-rc.26", 
-    "@vuepress/bundler-vite": "2.0.0-rc.19"
+    "@vuepress/bundler-vite": "2.0.0-rc.19",
+    "gray-matter": "^4.0.3"
   }
 }
