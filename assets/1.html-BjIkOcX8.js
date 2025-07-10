@@ -1,0 +1,1 @@
+import{_ as e,c as t,o as a}from"./app-Cb7V6dmb.js";const n={};function r(o,c){return a(),t("div")}const l=e(n,[["render",r]]),_=JSON.parse('{"path":"/tags/gerenganwu/1.html","title":"","lang":"en-US","frontmatter":{"layout":"Categories"},"headers":[],"git":{},"filePathRelative":null}');export{l as comp,_ as data};

@@ -1,1 +1,0 @@
-import{_ as e,c as t,o as a}from"./app--xDOKwpD.js";const r={};function n(o,c){return a(),t("div")}const l=e(r,[["render",n]]),_=JSON.parse('{"path":"/tags/kubernetes/1.html","title":"","lang":"en-US","frontmatter":{"layout":"Categories"},"headers":[],"git":{},"filePathRelative":null}');export{l as comp,_ as data};
