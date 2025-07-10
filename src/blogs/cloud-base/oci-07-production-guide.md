@@ -283,6 +283,8 @@
         ]
     },
     "hooks": {
+        // Hook 系统详细配置请参考：OCI Hook 系统深度解析
+        // https://github.com/your-repo/blog/blob/main/src/blogs/cloud-base/oci-08-hooks-deep-dive.md
         "createRuntime": [
             {
                 "path": "/usr/local/bin/security-audit-hook",

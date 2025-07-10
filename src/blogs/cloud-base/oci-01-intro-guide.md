@@ -266,7 +266,7 @@ sudo runc list
 2. **学习运行时开发**
    - runc 源码分析
    - 自定义运行时开发
-   - Hook 系统使用
+   - Hook 系统使用（详见 [OCI Hook 系统深度解析](./oci-08-hooks-deep-dive.md)）
 
 3. **生态系统集成**
    - Kubernetes 集成

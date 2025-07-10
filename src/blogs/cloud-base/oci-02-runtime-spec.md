@@ -243,6 +243,8 @@ type LinuxDeviceCgroup struct {
 
 ### Hook 系统和生命周期管理
 
+> **深度解析：** 关于 Hook 系统的详细信息，请参阅 **[OCI Hook 系统深度解析](./oci-08-hooks-deep-dive.md)**，包含完整的 Hook 类型、执行上下文、标准输入格式和实现示例。
+
 #### Hook 类型
 
 1. **`createRuntime`** - 运行时命名空间，环境创建后
