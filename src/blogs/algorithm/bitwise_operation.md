@@ -2,7 +2,14 @@
 title: 位运算基本操作与常用技巧
 date: 2022-10-24
 tags:
+ - 算法
  - 位运算
+ - leetcode
+ - python
+ - golang
+ - 中级
+ - 面试准备
+ - 数学技巧
 categories: 
  - 算法
 sidebar: auto

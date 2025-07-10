@@ -3,11 +3,18 @@
     {
       "id": "sort_1",
       "label": "常用排序算法简析",
-      "title": "分类: 算法\n标签: 排序\n点击查看详情",
+      "title": "分类: 算法\n标签: 算法, 数据结构, 排序算法, python, golang, typescript, 入门级, 面试准备\n点击查看详情",
       "color": "#95a5a6",
       "category": "算法",
       "tags": [
-        "排序"
+        "算法",
+        "数据结构",
+        "排序算法",
+        "python",
+        "golang",
+        "typescript",
+        "入门级",
+        "面试准备"
       ],
       "path": "/blogs/algorithm/array/sort_1.html",
       "date": "2022-03-01T00:00:00.000Z"
@@ -15,11 +22,18 @@
     {
       "id": "bitwise_operation",
       "label": "位运算基本操作与常用技巧",
-      "title": "分类: 算法\n标签: 位运算\n点击查看详情",
+      "title": "分类: 算法\n标签: 算法, 位运算, leetcode, python, golang, 中级, 面试准备, 数学技巧\n点击查看详情",
       "color": "#95a5a6",
       "category": "算法",
       "tags": [
-        "位运算"
+        "算法",
+        "位运算",
+        "leetcode",
+        "python",
+        "golang",
+        "中级",
+        "面试准备",
+        "数学技巧"
       ],
       "path": "/blogs/algorithm/bitwise_operation.html",
       "date": "2022-10-24T00:00:00.000Z"
@@ -27,11 +41,15 @@
     {
       "id": "learning_algorithm",
       "label": "算法学习有感",
-      "title": "分类: 算法\n标签: 感悟\n点击查看详情",
+      "title": "分类: 算法\n标签: 算法, 学习笔记, 个人感悟, 学习方法, 入门级\n点击查看详情",
       "color": "#95a5a6",
       "category": "算法",
       "tags": [
-        "感悟"
+        "算法",
+        "学习笔记",
+        "个人感悟",
+        "学习方法",
+        "入门级"
       ],
       "path": "/blogs/algorithm/learning_algorithm.html",
       "date": "2022-9-30"
@@ -39,11 +57,17 @@
     {
       "id": "cache_pattern",
       "label": "缓存模式设计与实践",
-      "title": "分类: 缓存\n标签: 最佳实践\n点击查看详情",
+      "title": "分类: 缓存\n标签: 缓存设计, 系统设计, redis, 设计模式, 分布式系统, 中级, 生产环境\n点击查看详情",
       "color": "#95a5a6",
       "category": "缓存",
       "tags": [
-        "最佳实践"
+        "缓存设计",
+        "系统设计",
+        "redis",
+        "设计模式",
+        "分布式系统",
+        "中级",
+        "生产环境"
       ],
       "path": "/blogs/cache/cache_pattern.html",
       "date": "2022-03-01T00:00:00.000Z"
@@ -51,12 +75,17 @@
     {
       "id": "docker_tech",
       "label": "容器技术之基本操作",
-      "title": "分类: 云原生\n标签: docker, 容器\n点击查看详情",
+      "title": "分类: 云原生\n标签: docker, 容器技术, 云原生, 虚拟化, 运维, 入门级, 工具使用\n点击查看详情",
       "color": "#95a5a6",
       "category": "云原生",
       "tags": [
         "docker",
-        "容器"
+        "容器技术",
+        "云原生",
+        "虚拟化",
+        "运维",
+        "入门级",
+        "工具使用"
       ],
       "path": "/blogs/cloud-base/docker_tech.html",
       "date": "2023-11-12T00:00:00.000Z"
@@ -64,12 +93,18 @@
     {
       "id": "k3s",
       "label": "k3s(轻量级k8s)部署",
-      "title": "分类: 云原生\n标签: k3s, 最佳实践\n点击查看详情",
+      "title": "分类: 云原生\n标签: kubernetes, k3s, 云原生, 容器编排, 运维, 部署, 中级, 生产环境\n点击查看详情",
       "color": "#95a5a6",
       "category": "云原生",
       "tags": [
+        "kubernetes",
         "k3s",
-        "最佳实践"
+        "云原生",
+        "容器编排",
+        "运维",
+        "部署",
+        "中级",
+        "生产环境"
       ],
       "path": "/blogs/cloud-base/k3s.html",
       "date": "2022-01-03T00:00:00.000Z"
@@ -77,11 +112,18 @@
     {
       "id": "k3s_k8s_ingress",
       "label": "k8s 使用小tip",
-      "title": "分类: 云原生\n标签: k8s\n点击查看详情",
+      "title": "分类: 云原生\n标签: kubernetes, k8s, 云原生, 容器编排, ingress, 运维技巧, 中级, 问题解决\n点击查看详情",
       "color": "#95a5a6",
       "category": "云原生",
       "tags": [
-        "k8s"
+        "kubernetes",
+        "k8s",
+        "云原生",
+        "容器编排",
+        "ingress",
+        "运维技巧",
+        "中级",
+        "问题解决"
       ],
       "path": "/blogs/cloud-base/k3s_k8s_ingress.html",
       "date": "2022-01-03T00:00:00.000Z"
@@ -89,12 +131,17 @@
     {
       "id": "linux_namespace",
       "label": "linux namespace",
-      "title": "分类: linux\n标签: linux, 虚拟化\n点击查看详情",
+      "title": "分类: linux\n标签: linux, namespace, 容器技术, 系统原理, 虚拟化, 中级, 底层技术\n点击查看详情",
       "color": "#96ceb4",
       "category": "linux",
       "tags": [
         "linux",
-        "虚拟化"
+        "namespace",
+        "容器技术",
+        "系统原理",
+        "虚拟化",
+        "中级",
+        "底层技术"
       ],
       "path": "/blogs/linux/linux_namespace.html",
       "date": "2023-04-24T00:00:00.000Z"
@@ -102,12 +149,17 @@
     {
       "id": "python_checklist",
       "label": "python checklist",
-      "title": "分类: python\n标签: 最佳实践, checklist\n点击查看详情",
+      "title": "分类: python\n标签: python, 代码规范, 开发规范, pep8, 工程实践, 入门级, 开发工具\n点击查看详情",
       "color": "#ff9ff3",
       "category": "python",
       "tags": [
-        "最佳实践",
-        "checklist"
+        "python",
+        "代码规范",
+        "开发规范",
+        "pep8",
+        "工程实践",
+        "入门级",
+        "开发工具"
       ],
       "path": "/blogs/python/python_checklist.html",
       "date": "2019-06-03T00:00:00.000Z"
@@ -115,13 +167,17 @@
     {
       "id": "python_env_manage",
       "label": "python 环境管理",
-      "title": "分类: python\n标签: 环境管理, 最佳实践, poetry\n点击查看详情",
+      "title": "分类: python\n标签: python, 环境管理, pyenv, poetry, 包管理, 工程实践, 入门级\n点击查看详情",
       "color": "#ff9ff3",
       "category": "python",
       "tags": [
+        "python",
         "环境管理",
-        "最佳实践",
-        "poetry"
+        "pyenv",
+        "poetry",
+        "包管理",
+        "工程实践",
+        "入门级"
       ],
       "path": "/blogs/python/python_env_manage.html",
       "date": "2020-2-17"
@@ -129,12 +185,18 @@
     {
       "id": "gevent",
       "label": "Gevent 异步编程",
-      "title": "分类: python\n标签: 源码解析, flask框架\n点击查看详情",
+      "title": "分类: python\n标签: python, 异步编程, gevent, 协程, 源码解析, 性能优化, 高级, web开发\n点击查看详情",
       "color": "#ff9ff3",
       "category": "python",
       "tags": [
+        "python",
+        "异步编程",
+        "gevent",
+        "协程",
         "源码解析",
-        "flask框架"
+        "性能优化",
+        "高级",
+        "web开发"
       ],
       "path": "/blogs/python-web/gevent.html",
       "date": "2020-06-03T00:00:00.000Z"
@@ -157,85 +219,433 @@
     {
       "from": "sort_1",
       "to": "bitwise_operation",
-      "weight": 4,
-      "width": 4,
-      "length": 120,
-      "commonTags": [],
-      "meaningfulTags": []
+      "weight": 16,
+      "width": 5,
+      "length": -120,
+      "commonTags": [
+        "算法",
+        "python",
+        "golang",
+        "面试准备"
+      ],
+      "meaningfulTags": [
+        "算法",
+        "python",
+        "golang",
+        "面试准备"
+      ]
     },
     {
       "from": "sort_1",
       "to": "learning_algorithm",
-      "weight": 4,
-      "width": 4,
-      "length": 120,
-      "commonTags": [],
-      "meaningfulTags": []
+      "weight": 10,
+      "width": 5,
+      "length": 0,
+      "commonTags": [
+        "算法",
+        "入门级"
+      ],
+      "meaningfulTags": [
+        "算法",
+        "入门级"
+      ]
+    },
+    {
+      "from": "sort_1",
+      "to": "docker_tech",
+      "weight": 3,
+      "width": 3,
+      "length": 140,
+      "commonTags": [
+        "入门级"
+      ],
+      "meaningfulTags": [
+        "入门级"
+      ]
+    },
+    {
+      "from": "sort_1",
+      "to": "python_checklist",
+      "weight": 6,
+      "width": 5,
+      "length": 80,
+      "commonTags": [
+        "python",
+        "入门级"
+      ],
+      "meaningfulTags": [
+        "python",
+        "入门级"
+      ]
+    },
+    {
+      "from": "sort_1",
+      "to": "python_env_manage",
+      "weight": 6,
+      "width": 5,
+      "length": 80,
+      "commonTags": [
+        "python",
+        "入门级"
+      ],
+      "meaningfulTags": [
+        "python",
+        "入门级"
+      ]
+    },
+    {
+      "from": "sort_1",
+      "to": "gevent",
+      "weight": 3,
+      "width": 3,
+      "length": 140,
+      "commonTags": [
+        "python"
+      ],
+      "meaningfulTags": [
+        "python"
+      ]
     },
     {
       "from": "bitwise_operation",
       "to": "learning_algorithm",
-      "weight": 4,
-      "width": 4,
-      "length": 120,
-      "commonTags": [],
-      "meaningfulTags": []
+      "weight": 7,
+      "width": 5,
+      "length": 60,
+      "commonTags": [
+        "算法"
+      ],
+      "meaningfulTags": [
+        "算法"
+      ]
+    },
+    {
+      "from": "bitwise_operation",
+      "to": "cache_pattern",
+      "weight": 3,
+      "width": 3,
+      "length": 140,
+      "commonTags": [
+        "中级"
+      ],
+      "meaningfulTags": [
+        "中级"
+      ]
+    },
+    {
+      "from": "bitwise_operation",
+      "to": "k3s",
+      "weight": 3,
+      "width": 3,
+      "length": 140,
+      "commonTags": [
+        "中级"
+      ],
+      "meaningfulTags": [
+        "中级"
+      ]
+    },
+    {
+      "from": "bitwise_operation",
+      "to": "k3s_k8s_ingress",
+      "weight": 3,
+      "width": 3,
+      "length": 140,
+      "commonTags": [
+        "中级"
+      ],
+      "meaningfulTags": [
+        "中级"
+      ]
+    },
+    {
+      "from": "bitwise_operation",
+      "to": "linux_namespace",
+      "weight": 3,
+      "width": 3,
+      "length": 140,
+      "commonTags": [
+        "中级"
+      ],
+      "meaningfulTags": [
+        "中级"
+      ]
+    },
+    {
+      "from": "bitwise_operation",
+      "to": "python_checklist",
+      "weight": 3,
+      "width": 3,
+      "length": 140,
+      "commonTags": [
+        "python"
+      ],
+      "meaningfulTags": [
+        "python"
+      ]
+    },
+    {
+      "from": "bitwise_operation",
+      "to": "python_env_manage",
+      "weight": 3,
+      "width": 3,
+      "length": 140,
+      "commonTags": [
+        "python"
+      ],
+      "meaningfulTags": [
+        "python"
+      ]
+    },
+    {
+      "from": "bitwise_operation",
+      "to": "gevent",
+      "weight": 3,
+      "width": 3,
+      "length": 140,
+      "commonTags": [
+        "python"
+      ],
+      "meaningfulTags": [
+        "python"
+      ]
+    },
+    {
+      "from": "learning_algorithm",
+      "to": "docker_tech",
+      "weight": 3,
+      "width": 3,
+      "length": 140,
+      "commonTags": [
+        "入门级"
+      ],
+      "meaningfulTags": [
+        "入门级"
+      ]
+    },
+    {
+      "from": "learning_algorithm",
+      "to": "python_checklist",
+      "weight": 3,
+      "width": 3,
+      "length": 140,
+      "commonTags": [
+        "入门级"
+      ],
+      "meaningfulTags": [
+        "入门级"
+      ]
+    },
+    {
+      "from": "learning_algorithm",
+      "to": "python_env_manage",
+      "weight": 3,
+      "width": 3,
+      "length": 140,
+      "commonTags": [
+        "入门级"
+      ],
+      "meaningfulTags": [
+        "入门级"
+      ]
+    },
+    {
+      "from": "cache_pattern",
+      "to": "k3s",
+      "weight": 6,
+      "width": 5,
+      "length": 80,
+      "commonTags": [
+        "中级",
+        "生产环境"
+      ],
+      "meaningfulTags": [
+        "中级",
+        "生产环境"
+      ]
+    },
+    {
+      "from": "cache_pattern",
+      "to": "k3s_k8s_ingress",
+      "weight": 3,
+      "width": 3,
+      "length": 140,
+      "commonTags": [
+        "中级"
+      ],
+      "meaningfulTags": [
+        "中级"
+      ]
+    },
+    {
+      "from": "cache_pattern",
+      "to": "linux_namespace",
+      "weight": 3,
+      "width": 3,
+      "length": 140,
+      "commonTags": [
+        "中级"
+      ],
+      "meaningfulTags": [
+        "中级"
+      ]
     },
     {
       "from": "docker_tech",
       "to": "k3s",
-      "weight": 4,
-      "width": 4,
-      "length": 120,
-      "commonTags": [],
-      "meaningfulTags": []
+      "weight": 10,
+      "width": 5,
+      "length": 0,
+      "commonTags": [
+        "云原生",
+        "运维"
+      ],
+      "meaningfulTags": [
+        "云原生",
+        "运维"
+      ]
     },
     {
       "from": "docker_tech",
       "to": "k3s_k8s_ingress",
-      "weight": 4,
-      "width": 4,
-      "length": 120,
-      "commonTags": [],
-      "meaningfulTags": []
+      "weight": 7,
+      "width": 5,
+      "length": 60,
+      "commonTags": [
+        "云原生"
+      ],
+      "meaningfulTags": [
+        "云原生"
+      ]
+    },
+    {
+      "from": "docker_tech",
+      "to": "linux_namespace",
+      "weight": 6,
+      "width": 5,
+      "length": 80,
+      "commonTags": [
+        "容器技术",
+        "虚拟化"
+      ],
+      "meaningfulTags": [
+        "容器技术",
+        "虚拟化"
+      ]
+    },
+    {
+      "from": "docker_tech",
+      "to": "python_checklist",
+      "weight": 3,
+      "width": 3,
+      "length": 140,
+      "commonTags": [
+        "入门级"
+      ],
+      "meaningfulTags": [
+        "入门级"
+      ]
+    },
+    {
+      "from": "docker_tech",
+      "to": "python_env_manage",
+      "weight": 3,
+      "width": 3,
+      "length": 140,
+      "commonTags": [
+        "入门级"
+      ],
+      "meaningfulTags": [
+        "入门级"
+      ]
     },
     {
       "from": "k3s",
       "to": "k3s_k8s_ingress",
-      "weight": 4,
-      "width": 4,
-      "length": 120,
-      "commonTags": [],
-      "meaningfulTags": []
+      "weight": 16,
+      "width": 5,
+      "length": -120,
+      "commonTags": [
+        "kubernetes",
+        "云原生",
+        "容器编排",
+        "中级"
+      ],
+      "meaningfulTags": [
+        "kubernetes",
+        "云原生",
+        "容器编排",
+        "中级"
+      ]
+    },
+    {
+      "from": "k3s",
+      "to": "linux_namespace",
+      "weight": 3,
+      "width": 3,
+      "length": 140,
+      "commonTags": [
+        "中级"
+      ],
+      "meaningfulTags": [
+        "中级"
+      ]
+    },
+    {
+      "from": "k3s_k8s_ingress",
+      "to": "linux_namespace",
+      "weight": 3,
+      "width": 3,
+      "length": 140,
+      "commonTags": [
+        "中级"
+      ],
+      "meaningfulTags": [
+        "中级"
+      ]
     },
     {
       "from": "python_checklist",
       "to": "python_env_manage",
-      "weight": 5,
+      "weight": 13,
       "width": 5,
-      "length": 100,
+      "length": -60,
       "commonTags": [
-        "最佳实践"
+        "python",
+        "工程实践",
+        "入门级"
       ],
-      "meaningfulTags": []
+      "meaningfulTags": [
+        "python",
+        "工程实践",
+        "入门级"
+      ]
     },
     {
       "from": "python_checklist",
       "to": "gevent",
-      "weight": 4,
-      "width": 4,
-      "length": 120,
-      "commonTags": [],
-      "meaningfulTags": []
+      "weight": 7,
+      "width": 5,
+      "length": 60,
+      "commonTags": [
+        "python"
+      ],
+      "meaningfulTags": [
+        "python"
+      ]
     },
     {
       "from": "python_env_manage",
       "to": "gevent",
-      "weight": 4,
-      "width": 4,
-      "length": 120,
-      "commonTags": [],
-      "meaningfulTags": []
+      "weight": 7,
+      "width": 5,
+      "length": 60,
+      "commonTags": [
+        "python"
+      ],
+      "meaningfulTags": [
+        "python"
+      ]
     }
   ],
   "articles": [
@@ -244,7 +654,14 @@
       "title": "常用排序算法简析",
       "category": "算法",
       "tags": [
-        "排序"
+        "算法",
+        "数据结构",
+        "排序算法",
+        "python",
+        "golang",
+        "typescript",
+        "入门级",
+        "面试准备"
       ],
       "date": "2022-03-01T00:00:00.000Z",
       "path": "/blogs/algorithm/array/sort_1.html",
@@ -255,7 +672,14 @@
       "title": "位运算基本操作与常用技巧",
       "category": "算法",
       "tags": [
-        "位运算"
+        "算法",
+        "位运算",
+        "leetcode",
+        "python",
+        "golang",
+        "中级",
+        "面试准备",
+        "数学技巧"
       ],
       "date": "2022-10-24T00:00:00.000Z",
       "path": "/blogs/algorithm/bitwise_operation.html",
@@ -266,7 +690,11 @@
       "title": "算法学习有感",
       "category": "算法",
       "tags": [
-        "感悟"
+        "算法",
+        "学习笔记",
+        "个人感悟",
+        "学习方法",
+        "入门级"
       ],
       "date": "2022-9-30",
       "path": "/blogs/algorithm/learning_algorithm.html",
@@ -277,7 +705,13 @@
       "title": "缓存模式设计与实践",
       "category": "缓存",
       "tags": [
-        "最佳实践"
+        "缓存设计",
+        "系统设计",
+        "redis",
+        "设计模式",
+        "分布式系统",
+        "中级",
+        "生产环境"
       ],
       "date": "2022-03-01T00:00:00.000Z",
       "path": "/blogs/cache/cache_pattern.html",
@@ -289,7 +723,12 @@
       "category": "云原生",
       "tags": [
         "docker",
-        "容器"
+        "容器技术",
+        "云原生",
+        "虚拟化",
+        "运维",
+        "入门级",
+        "工具使用"
       ],
       "date": "2023-11-12T00:00:00.000Z",
       "path": "/blogs/cloud-base/docker_tech.html",
@@ -300,8 +739,14 @@
       "title": "k3s(轻量级k8s)部署",
       "category": "云原生",
       "tags": [
+        "kubernetes",
         "k3s",
-        "最佳实践"
+        "云原生",
+        "容器编排",
+        "运维",
+        "部署",
+        "中级",
+        "生产环境"
       ],
       "date": "2022-01-03T00:00:00.000Z",
       "path": "/blogs/cloud-base/k3s.html",
@@ -312,7 +757,14 @@
       "title": "k8s 使用小tip",
       "category": "云原生",
       "tags": [
-        "k8s"
+        "kubernetes",
+        "k8s",
+        "云原生",
+        "容器编排",
+        "ingress",
+        "运维技巧",
+        "中级",
+        "问题解决"
       ],
       "date": "2022-01-03T00:00:00.000Z",
       "path": "/blogs/cloud-base/k3s_k8s_ingress.html",
@@ -324,7 +776,12 @@
       "category": "linux",
       "tags": [
         "linux",
-        "虚拟化"
+        "namespace",
+        "容器技术",
+        "系统原理",
+        "虚拟化",
+        "中级",
+        "底层技术"
       ],
       "date": "2023-04-24T00:00:00.000Z",
       "path": "/blogs/linux/linux_namespace.html",
@@ -335,8 +792,13 @@
       "title": "python checklist",
       "category": "python",
       "tags": [
-        "最佳实践",
-        "checklist"
+        "python",
+        "代码规范",
+        "开发规范",
+        "pep8",
+        "工程实践",
+        "入门级",
+        "开发工具"
       ],
       "date": "2019-06-03T00:00:00.000Z",
       "path": "/blogs/python/python_checklist.html",
@@ -347,9 +809,13 @@
       "title": "python 环境管理",
       "category": "python",
       "tags": [
+        "python",
         "环境管理",
-        "最佳实践",
-        "poetry"
+        "pyenv",
+        "poetry",
+        "包管理",
+        "工程实践",
+        "入门级"
       ],
       "date": "2020-2-17",
       "path": "/blogs/python/python_env_manage.html",
@@ -360,8 +826,14 @@
       "title": "Gevent 异步编程",
       "category": "python",
       "tags": [
+        "python",
+        "异步编程",
+        "gevent",
+        "协程",
         "源码解析",
-        "flask框架"
+        "性能优化",
+        "高级",
+        "web开发"
       ],
       "date": "2020-06-03T00:00:00.000Z",
       "path": "/blogs/python-web/gevent.html",

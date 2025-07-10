@@ -2,9 +2,13 @@
 title: python 环境管理
 date: 2020-2-17
 tags:
+ - python
  - 环境管理
- - 最佳实践
+ - pyenv
  - poetry
+ - 包管理
+ - 工程实践
+ - 入门级
 categories: 
  - python
 sidebar: auto

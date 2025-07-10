@@ -2,7 +2,14 @@
 title: k8s 使用小tip
 date: 2022-01-03
 tags:
+ - kubernetes
  - k8s
+ - 云原生
+ - 容器编排
+ - ingress
+ - 运维技巧
+ - 中级
+ - 问题解决
 categories:
  - 云原生
 sidebar: auto

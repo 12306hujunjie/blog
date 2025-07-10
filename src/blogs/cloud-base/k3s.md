@@ -2,8 +2,14 @@
 title: k3s(轻量级k8s)部署
 date: 2022-01-03
 tags:
+ - kubernetes
  - k3s
- - 最佳实践
+ - 云原生
+ - 容器编排
+ - 运维
+ - 部署
+ - 中级
+ - 生产环境
 categories:
  - 云原生
 sidebar: auto

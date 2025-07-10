@@ -2,8 +2,13 @@
 title: python checklist
 date: 2019-06-03
 tags:
- - 最佳实践
- - checklist
+ - python
+ - 代码规范
+ - 开发规范
+ - pep8
+ - 工程实践
+ - 入门级
+ - 开发工具
 categories: 
  - python
 sidebar: auto

@@ -2,8 +2,14 @@
 title: Gevent 异步编程
 date: 2020-06-03
 tags:
+ - python
+ - 异步编程
+ - gevent
+ - 协程
  - 源码解析
- - flask框架
+ - 性能优化
+ - 高级
+ - web开发
 categories: 
  - python
 sidebar: auto

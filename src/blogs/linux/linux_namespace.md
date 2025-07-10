@@ -3,7 +3,12 @@ title: linux namespace
 date: 2023-04-24
 tags:
  - linux
+ - namespace
+ - 容器技术
+ - 系统原理
  - 虚拟化
+ - 中级
+ - 底层技术
 categories: 
  - linux
  - namespace

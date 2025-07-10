@@ -3,7 +3,12 @@ title: 容器技术之基本操作
 date: 2023-11-12
 tags:
  - docker
- - 容器
+ - 容器技术
+ - 云原生
+ - 虚拟化
+ - 运维
+ - 入门级
+ - 工具使用
 categories:
  - 云原生
 sidebar: auto
