@@ -129,6 +129,78 @@
       "date": "2022-01-03T00:00:00.000Z"
     },
     {
+      "id": "oci-linux-configurations-blog",
+      "label": "OCI Linux 容器配置规范与接口完全指南",
+      "title": "分类: cloud-base\n标签: OCI, Linux容器, 配置规范, 接口设计, 容器技术, 云原生, 标准化\n点击查看详情",
+      "color": "#45b7d1",
+      "category": "cloud-base",
+      "tags": [
+        "OCI",
+        "Linux容器",
+        "配置规范",
+        "接口设计",
+        "容器技术",
+        "云原生",
+        "标准化"
+      ],
+      "path": "/blogs/cloud-base/oci-linux-configurations-blog.html",
+      "date": "2024-01-05T00:00:00.000Z"
+    },
+    {
+      "id": "runc-advanced-lifecycle-analysis",
+      "label": "runc 容器生命周期高级流程深度分析",
+      "title": "分类: cloud-base\n标签: runc, 容器技术, 生命周期管理, 深度分析, 云原生, CRIU, Cgroup\n点击查看详情",
+      "color": "#45b7d1",
+      "category": "cloud-base",
+      "tags": [
+        "runc",
+        "容器技术",
+        "生命周期管理",
+        "深度分析",
+        "云原生",
+        "CRIU",
+        "Cgroup"
+      ],
+      "path": "/blogs/cloud-base/runc-advanced-lifecycle-analysis.html",
+      "date": "2024-01-15T00:00:00.000Z"
+    },
+    {
+      "id": "runc-comprehensive-design-guide",
+      "label": "runc 设计与实现完全指南",
+      "title": "分类: cloud-base\n标签: runc, 容器技术, 设计指南, 实现细节, 云原生, OCI, Linux内核\n点击查看详情",
+      "color": "#45b7d1",
+      "category": "cloud-base",
+      "tags": [
+        "runc",
+        "容器技术",
+        "设计指南",
+        "实现细节",
+        "云原生",
+        "OCI",
+        "Linux内核"
+      ],
+      "path": "/blogs/cloud-base/runc-comprehensive-design-guide.html",
+      "date": "2024-01-10T00:00:00.000Z"
+    },
+    {
+      "id": "runc-container-lifecycle-diagrams",
+      "label": "runc 容器生命周期流程图",
+      "title": "分类: cloud-base\n标签: runc, 容器生命周期, 流程图, 架构图, 容器技术, 可视化, 系统设计\n点击查看详情",
+      "color": "#45b7d1",
+      "category": "cloud-base",
+      "tags": [
+        "runc",
+        "容器生命周期",
+        "流程图",
+        "架构图",
+        "容器技术",
+        "可视化",
+        "系统设计"
+      ],
+      "path": "/blogs/cloud-base/runc-container-lifecycle-diagrams.html",
+      "date": "2024-01-20T00:00:00.000Z"
+    },
+    {
       "id": "linux_namespace",
       "label": "linux namespace",
       "title": "分类: linux\n标签: linux, namespace, 容器技术, 系统原理, 虚拟化, 中级, 底层技术\n点击查看详情",
@@ -203,16 +275,17 @@
     },
     {
       "id": "README",
-      "label": "文档指南",
-      "title": "分类: 项目说明\n标签: 项目文档, 使用指南\n点击查看详情",
+      "label": "文档中心",
+      "title": "分类: docs\n标签: 文档, 指南, 学习资料\n点击查看详情",
       "color": "#95a5a6",
-      "category": "项目说明",
+      "category": "docs",
       "tags": [
-        "项目文档",
-        "使用指南"
+        "文档",
+        "指南",
+        "学习资料"
       ],
       "path": "/docs/README.html",
-      "date": "2020-05-29T00:00:00.000Z"
+      "date": "2024-01-01T00:00:00.000Z"
     }
   ],
   "edges": [
@@ -479,6 +552,19 @@
     },
     {
       "from": "cache_pattern",
+      "to": "runc-container-lifecycle-diagrams",
+      "weight": 3,
+      "width": 3,
+      "length": 140,
+      "commonTags": [
+        "系统设计"
+      ],
+      "meaningfulTags": [
+        "系统设计"
+      ]
+    },
+    {
+      "from": "cache_pattern",
       "to": "linux_namespace",
       "weight": 3,
       "width": 3,
@@ -516,6 +602,64 @@
       ],
       "meaningfulTags": [
         "云原生"
+      ]
+    },
+    {
+      "from": "docker_tech",
+      "to": "oci-linux-configurations-blog",
+      "weight": 6,
+      "width": 5,
+      "length": 80,
+      "commonTags": [
+        "容器技术",
+        "云原生"
+      ],
+      "meaningfulTags": [
+        "容器技术",
+        "云原生"
+      ]
+    },
+    {
+      "from": "docker_tech",
+      "to": "runc-advanced-lifecycle-analysis",
+      "weight": 6,
+      "width": 5,
+      "length": 80,
+      "commonTags": [
+        "容器技术",
+        "云原生"
+      ],
+      "meaningfulTags": [
+        "容器技术",
+        "云原生"
+      ]
+    },
+    {
+      "from": "docker_tech",
+      "to": "runc-comprehensive-design-guide",
+      "weight": 6,
+      "width": 5,
+      "length": 80,
+      "commonTags": [
+        "容器技术",
+        "云原生"
+      ],
+      "meaningfulTags": [
+        "容器技术",
+        "云原生"
+      ]
+    },
+    {
+      "from": "docker_tech",
+      "to": "runc-container-lifecycle-diagrams",
+      "weight": 3,
+      "width": 3,
+      "length": 140,
+      "commonTags": [
+        "容器技术"
+      ],
+      "meaningfulTags": [
+        "容器技术"
       ]
     },
     {
@@ -580,6 +724,45 @@
     },
     {
       "from": "k3s",
+      "to": "oci-linux-configurations-blog",
+      "weight": 3,
+      "width": 3,
+      "length": 140,
+      "commonTags": [
+        "云原生"
+      ],
+      "meaningfulTags": [
+        "云原生"
+      ]
+    },
+    {
+      "from": "k3s",
+      "to": "runc-advanced-lifecycle-analysis",
+      "weight": 3,
+      "width": 3,
+      "length": 140,
+      "commonTags": [
+        "云原生"
+      ],
+      "meaningfulTags": [
+        "云原生"
+      ]
+    },
+    {
+      "from": "k3s",
+      "to": "runc-comprehensive-design-guide",
+      "weight": 3,
+      "width": 3,
+      "length": 140,
+      "commonTags": [
+        "云原生"
+      ],
+      "meaningfulTags": [
+        "云原生"
+      ]
+    },
+    {
+      "from": "k3s",
       "to": "linux_namespace",
       "weight": 3,
       "width": 3,
@@ -593,6 +776,45 @@
     },
     {
       "from": "k3s_k8s_ingress",
+      "to": "oci-linux-configurations-blog",
+      "weight": 3,
+      "width": 3,
+      "length": 140,
+      "commonTags": [
+        "云原生"
+      ],
+      "meaningfulTags": [
+        "云原生"
+      ]
+    },
+    {
+      "from": "k3s_k8s_ingress",
+      "to": "runc-advanced-lifecycle-analysis",
+      "weight": 3,
+      "width": 3,
+      "length": 140,
+      "commonTags": [
+        "云原生"
+      ],
+      "meaningfulTags": [
+        "云原生"
+      ]
+    },
+    {
+      "from": "k3s_k8s_ingress",
+      "to": "runc-comprehensive-design-guide",
+      "weight": 3,
+      "width": 3,
+      "length": 140,
+      "commonTags": [
+        "云原生"
+      ],
+      "meaningfulTags": [
+        "云原生"
+      ]
+    },
+    {
+      "from": "k3s_k8s_ingress",
       "to": "linux_namespace",
       "weight": 3,
       "width": 3,
@@ -602,6 +824,150 @@
       ],
       "meaningfulTags": [
         "中级"
+      ]
+    },
+    {
+      "from": "oci-linux-configurations-blog",
+      "to": "runc-advanced-lifecycle-analysis",
+      "weight": 10,
+      "width": 5,
+      "length": 0,
+      "commonTags": [
+        "容器技术",
+        "云原生"
+      ],
+      "meaningfulTags": [
+        "容器技术",
+        "云原生"
+      ]
+    },
+    {
+      "from": "oci-linux-configurations-blog",
+      "to": "runc-comprehensive-design-guide",
+      "weight": 13,
+      "width": 5,
+      "length": -60,
+      "commonTags": [
+        "OCI",
+        "容器技术",
+        "云原生"
+      ],
+      "meaningfulTags": [
+        "OCI",
+        "容器技术",
+        "云原生"
+      ]
+    },
+    {
+      "from": "oci-linux-configurations-blog",
+      "to": "runc-container-lifecycle-diagrams",
+      "weight": 7,
+      "width": 5,
+      "length": 60,
+      "commonTags": [
+        "容器技术"
+      ],
+      "meaningfulTags": [
+        "容器技术"
+      ]
+    },
+    {
+      "from": "oci-linux-configurations-blog",
+      "to": "linux_namespace",
+      "weight": 3,
+      "width": 3,
+      "length": 140,
+      "commonTags": [
+        "容器技术"
+      ],
+      "meaningfulTags": [
+        "容器技术"
+      ]
+    },
+    {
+      "from": "runc-advanced-lifecycle-analysis",
+      "to": "runc-comprehensive-design-guide",
+      "weight": 13,
+      "width": 5,
+      "length": -60,
+      "commonTags": [
+        "runc",
+        "容器技术",
+        "云原生"
+      ],
+      "meaningfulTags": [
+        "runc",
+        "容器技术",
+        "云原生"
+      ]
+    },
+    {
+      "from": "runc-advanced-lifecycle-analysis",
+      "to": "runc-container-lifecycle-diagrams",
+      "weight": 10,
+      "width": 5,
+      "length": 0,
+      "commonTags": [
+        "runc",
+        "容器技术"
+      ],
+      "meaningfulTags": [
+        "runc",
+        "容器技术"
+      ]
+    },
+    {
+      "from": "runc-advanced-lifecycle-analysis",
+      "to": "linux_namespace",
+      "weight": 3,
+      "width": 3,
+      "length": 140,
+      "commonTags": [
+        "容器技术"
+      ],
+      "meaningfulTags": [
+        "容器技术"
+      ]
+    },
+    {
+      "from": "runc-comprehensive-design-guide",
+      "to": "runc-container-lifecycle-diagrams",
+      "weight": 10,
+      "width": 5,
+      "length": 0,
+      "commonTags": [
+        "runc",
+        "容器技术"
+      ],
+      "meaningfulTags": [
+        "runc",
+        "容器技术"
+      ]
+    },
+    {
+      "from": "runc-comprehensive-design-guide",
+      "to": "linux_namespace",
+      "weight": 3,
+      "width": 3,
+      "length": 140,
+      "commonTags": [
+        "容器技术"
+      ],
+      "meaningfulTags": [
+        "容器技术"
+      ]
+    },
+    {
+      "from": "runc-container-lifecycle-diagrams",
+      "to": "linux_namespace",
+      "weight": 3,
+      "width": 3,
+      "length": 140,
+      "commonTags": [
+        "容器技术"
+      ],
+      "meaningfulTags": [
+        "容器技术"
       ]
     },
     {
@@ -771,6 +1137,74 @@
       "description": ""
     },
     {
+      "id": "oci-linux-configurations-blog",
+      "title": "OCI Linux 容器配置规范与接口完全指南",
+      "category": "cloud-base",
+      "tags": [
+        "OCI",
+        "Linux容器",
+        "配置规范",
+        "接口设计",
+        "容器技术",
+        "云原生",
+        "标准化"
+      ],
+      "date": "2024-01-05T00:00:00.000Z",
+      "path": "/blogs/cloud-base/oci-linux-configurations-blog.html",
+      "description": "深入解析OCI规范中的Linux相关配置选项和接口定义，涵盖运行时配置、资源管理、安全机制等核心内容"
+    },
+    {
+      "id": "runc-advanced-lifecycle-analysis",
+      "title": "runc 容器生命周期高级流程深度分析",
+      "category": "cloud-base",
+      "tags": [
+        "runc",
+        "容器技术",
+        "生命周期管理",
+        "深度分析",
+        "云原生",
+        "CRIU",
+        "Cgroup"
+      ],
+      "date": "2024-01-15T00:00:00.000Z",
+      "path": "/blogs/cloud-base/runc-advanced-lifecycle-analysis.html",
+      "description": "深入分析runc容器生命周期管理的高级流程和实现细节，包括暂停/恢复、CRIU检查点、动态更新等核心机制"
+    },
+    {
+      "id": "runc-comprehensive-design-guide",
+      "title": "runc 设计与实现完全指南",
+      "category": "cloud-base",
+      "tags": [
+        "runc",
+        "容器技术",
+        "设计指南",
+        "实现细节",
+        "云原生",
+        "OCI",
+        "Linux内核"
+      ],
+      "date": "2024-01-10T00:00:00.000Z",
+      "path": "/blogs/cloud-base/runc-comprehensive-design-guide.html",
+      "description": "全面深入的runc设计与实现指南，涵盖架构设计、核心组件、Linux内核技术集成、安全机制等方面"
+    },
+    {
+      "id": "runc-container-lifecycle-diagrams",
+      "title": "runc 容器生命周期流程图",
+      "category": "cloud-base",
+      "tags": [
+        "runc",
+        "容器生命周期",
+        "流程图",
+        "架构图",
+        "容器技术",
+        "可视化",
+        "系统设计"
+      ],
+      "date": "2024-01-20T00:00:00.000Z",
+      "path": "/blogs/cloud-base/runc-container-lifecycle-diagrams.html",
+      "description": "通过详细的流程图和架构图展示runc容器生命周期的各个阶段，包括创建、启动、运行等关键流程"
+    },
+    {
       "id": "linux_namespace",
       "title": "linux namespace",
       "category": "linux",
@@ -841,15 +1275,16 @@
     },
     {
       "id": "README",
-      "title": "文档指南",
-      "category": "项目说明",
+      "title": "文档中心",
+      "category": "docs",
       "tags": [
-        "项目文档",
-        "使用指南"
+        "文档",
+        "指南",
+        "学习资料"
       ],
-      "date": "2020-05-29T00:00:00.000Z",
+      "date": "2024-01-01T00:00:00.000Z",
       "path": "/docs/README.html",
-      "description": ""
+      "description": "技术文档和学习资料的集中展示页面"
     }
   ]
 }
