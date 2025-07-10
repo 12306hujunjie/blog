@@ -20,7 +20,7 @@ export default defineUserConfig({
     docsDir: 'src',
     lastUpdatedText: '更新于',
     autoSetBlogCategories: true,         // 自动设置分类
-    autoAddCategoryToNavbar: true,  // 自动将首页、分类和标签添加至头部导航条
+    autoAddCategoryToNavbar: false,  // 手动配置导航栏，避免重复
     catalogTitle: '目录',
     commentConfig: {
       type: 'valine',
@@ -54,17 +54,15 @@ export default defineUserConfig({
 
     navbar:
         [
-          // { text: 'Home', link: '/' },
-          // { text: 'Categories', link: '/blogs/',children: [
-          //     {text: "算法", link: '/blogs/algorithm'},
-          //   ]},
-          // { text: 'Tags', link: '/tags/tag1/1/' },
+          { text: 'Home', link: '/' },
+          { text: 'Categories', link: '/categories/cloud-base/1/' },
+          { text: 'Tags', link: '/tags/runc/1/' },
           { text: '知识地图', link: '/knowledge-map/' },
           { text: 'Docs',
             link: '/docs/',
             children: [
               { text: 'leetcode from scratch', link: '/docs/leetcode/' },
-              { text: 'vuepress-theme-reco', link: '/blogs/other/guide' }
+              { text: 'design pattern', link: '/docs/design_pattern/' }
             ]
           },
         ],

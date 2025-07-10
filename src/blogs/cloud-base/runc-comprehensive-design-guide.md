@@ -1,3 +1,20 @@
+---
+title: runc 设计与实现完全指南
+date: 2024-01-10
+tags:
+ - runc
+ - 容器技术
+ - 设计指南
+ - 实现细节
+ - 云原生
+ - OCI
+ - Linux内核
+categories: 
+ - cloud-base
+sidebar: auto
+description: 全面深入的runc设计与实现指南，涵盖架构设计、核心组件、Linux内核技术集成、安全机制等方面
+---
+
 # runc 设计与实现完全指南
 
 ## 目录
@@ -881,8 +898,6 @@ nsenter -t <pid> -n ip addr show
 ### 9.3 扩展开发指南
 
 #### 自定义Hook开发
-
-> **详细指南：** 关于 Hook 系统的完整开发指南，请参阅 **[OCI Hook 系统深度解析](./oci-08-hooks-deep-dive.md)**，包含详细的实现示例、最佳实践和故障排除。
 
 ```go
 type Hook struct {

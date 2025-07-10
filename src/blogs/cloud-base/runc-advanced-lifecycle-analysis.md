@@ -1,3 +1,20 @@
+---
+title: runc 容器生命周期高级流程深度分析
+date: 2024-01-15
+tags:
+ - runc
+ - 容器技术
+ - 生命周期管理
+ - 深度分析
+ - 云原生
+ - CRIU
+ - Cgroup
+categories: 
+ - cloud-base
+sidebar: auto
+description: 深入分析runc容器生命周期管理的高级流程和实现细节，包括暂停/恢复、CRIU检查点、动态更新等核心机制
+---
+
 # runc 容器生命周期高级流程深度分析
 
 ## 目录
@@ -146,32 +163,35 @@ func (c *Container) Resume() error {
 
 ### 2.1 CRIU 集成架构
 
-```
-CRIU 检查点/恢复架构:
-┌─────────────────────────────────────────────────────────┐
-│ runc checkpoint/restore 命令                            │
-├─────────────────────────────────────────────────────────┤
-│ gRPC/RPC 通信                                           │
-├─────────────────────────────────────────────────────────┤
-│ CRIU daemon 进程                                        │
-│ ┌─────────────────────────────────────────────────────┐ │
-│ │ 1. 进程树遍历和冻结                                │ │
-│ │ 2. 内存页面转储                                    │ │
-│ │ 3. 文件描述符状态保存                              │ │
-│ │ 4. 网络命名空间状态                                │ │
-│ │ 5. 挂载命名空间快照                                │ │
-│ │ 6. IPC 对象状态                                    │ │
-│ └─────────────────────────────────────────────────────┘ │
-├─────────────────────────────────────────────────────────┤
-│ 镜像文件存储                                            │
-│ ├── core-<pid>.img     (进程核心信息)                   │
-│ ├── mm-<pid>.img       (内存映射)                       │
-│ ├── pagemap-<pid>.img  (页面映射)                       │
-│ ├── pages-<n>.img      (内存页面数据)                   │
-│ ├── files.img          (文件描述符)                     │
-│ ├── fs-<pid>.img       (文件系统信息)                   │
-│ └── ...                                                 │
-└─────────────────────────────────────────────────────────┘
+```mermaid
+graph TB
+    A[runc checkpoint/restore 命令] --> B[gRPC/RPC 通信]
+    B --> C[CRIU daemon 进程]
+    
+    C --> D[进程树遍历和冻结]
+    C --> E[内存页面转储]
+    C --> F[文件描述符状态保存]
+    C --> G[网络命名空间状态]
+    C --> H[挂载命名空间快照]
+    C --> I[IPC 对象状态]
+    
+    D --> J[镜像文件存储]
+    E --> J
+    F --> J
+    G --> J
+    H --> J
+    I --> J
+    
+    J --> K[core-&lt;pid&gt;.img<br/>进程核心信息]
+    J --> L[mm-&lt;pid&gt;.img<br/>内存映射]
+    J --> M[pagemap-&lt;pid&gt;.img<br/>页面映射]
+    J --> N[pages-&lt;n&gt;.img<br/>内存页面数据]
+    J --> O[files.img<br/>文件描述符]
+    J --> P[fs-&lt;pid&gt;.img<br/>文件系统信息]
+    
+    style A fill:#e1f5fe
+    style C fill:#f3e5f5
+    style J fill:#e8f5e8
 ```
 
 ### 2.2 检查点创建流程
@@ -702,6 +722,41 @@ func (m *Manager) Destroy() error {
 
 ### 6.1 信号处理架构
 
+#### 信号处理流程图
+
+```mermaid
+graph TD
+    A[外部信号] --> B[信号缓冲通道<br/>容量: 2048]
+    B --> C{信号类型判断}
+    
+    C -->|SIGWINCH| D[终端窗口大小变化]
+    C -->|SIGCHLD| E[子进程状态变化]
+    C -->|SIGURG| F[Go运行时信号<br/>不转发]
+    C -->|其他信号| G[转发到容器PID 1]
+    
+    D --> H[调整TTY大小]
+    E --> I[收割僵尸进程]
+    G --> J[容器进程处理]
+    
+    I --> K[记录退出信息]
+    K --> L[通知退出事件]
+    
+    subgraph "子进程收割器"
+        M[启用Subreaper]
+        N[Wait4系统调用]
+        O[收集退出状态]
+    end
+    
+    E --> M
+    M --> N
+    N --> O
+    O --> K
+    
+    style A fill:#ffeb3b
+    style C fill:#2196f3
+    style I fill:#4caf50
+```
+
 #### 信号缓冲和转发机制
 
 **位置：** `signals.go:21-45`
@@ -860,7 +915,45 @@ for s := range h.signals {
 
 ## 7. 事件监控和统计收集
 
-### 7.1 实时统计收集
+### 7.1 实时统计收集架构
+
+```mermaid
+graph TB
+    A[Container.Stats()] --> B[统计信息聚合]
+    
+    B --> C[Cgroup统计]
+    B --> D[Intel RDT统计]
+    B --> E[网络接口统计]
+    
+    C --> C1[内存使用量]
+    C --> C2[CPU使用率]
+    C --> C3[块设备I/O]
+    C --> C4[进程数量]
+    
+    D --> D1[L3缓存占用]
+    D --> D2[内存带宽使用]
+    
+    E --> E1[接收字节数]
+    E --> E2[发送字节数]
+    E --> E3[丢包统计]
+    E --> E4[错误统计]
+    
+    subgraph "数据源"
+        F1[/sys/fs/cgroup/]
+        F2[/sys/fs/resctrl/]
+        F3[/sys/class/net/]
+    end
+    
+    C --> F1
+    D --> F2
+    E --> F3
+    
+    style A fill:#e3f2fd
+    style B fill:#f3e5f5
+    style C fill:#e8f5e8
+    style D fill:#fff3e0
+    style E fill:#fce4ec
+```
 
 #### 容器统计信息结构
 
@@ -899,7 +992,32 @@ func (c *Container) Stats() (*Stats, error) {
 
 ### 7.2 OOM 通知机制
 
-#### Eventfd 集成
+#### OOM 事件监控流程
+
+```mermaid
+sequenceDiagram
+    participant App as 应用程序
+    participant Runc as runc
+    participant Cgroup as Cgroup子系统
+    participant Kernel as 内核
+    participant EventFd as EventFD
+    
+    App->>Runc: 启动容器
+    Runc->>Cgroup: 创建memory cgroup
+    Runc->>EventFd: 创建eventfd
+    Runc->>Cgroup: 注册OOM事件监听<br/>写入cgroup.event_control
+    
+    Note over Cgroup,Kernel: 容器运行中...
+    
+    Kernel->>Cgroup: 内存不足触发OOM
+    Cgroup->>EventFd: 发送OOM事件通知
+    EventFd->>Runc: 通过channel通知
+    Runc->>App: OOM事件处理
+    
+    Note over App: 可以选择:<br/>1. 重启容器<br/>2. 增加内存限制<br/>3. 记录日志
+```
+
+#### Eventfd 集成实现
 
 **位置：** `libcontainer/notify_linux.go:63-71`
 
@@ -1126,7 +1244,61 @@ func createVethPair(hostIfName, containerIfName string) error {
 
 ## 9. 设备管理详细机制
 
-### 9.1 设备节点创建
+### 9.1 设备管理架构
+
+```mermaid
+graph TB
+    A[容器启动] --> B{需要设备设置?}
+    B -->|是| C[创建设备节点]
+    B -->|否| D[跳过设备设置]
+    
+    C --> E[默认设备创建]
+    C --> F[用户自定义设备]
+    
+    E --> G[/dev/null]
+    E --> H[/dev/zero]
+    E --> I[/dev/random]
+    E --> J[/dev/urandom]
+    E --> K[/dev/tty]
+    E --> L[/dev/console]
+    E --> M[/dev/ptmx]
+    
+    F --> N[设备权限验证]
+    N --> O[Cgroup设备控制]
+    
+    O --> P[设备访问规则]
+    P --> Q[读权限 r]
+    P --> R[写权限 w]
+    P --> S[创建权限 m]
+    
+    subgraph "设备类型"
+        T1[字符设备 c]
+        T2[块设备 b]
+        T3[所有设备 a]
+    end
+    
+    P --> T1
+    P --> T2
+    P --> T3
+    
+    subgraph "热插拔处理"
+        U1[Udev事件监听]
+        U2[设备添加]
+        U3[设备移除]
+        U4[权限更新]
+    end
+    
+    O --> U1
+    U1 --> U2
+    U1 --> U3
+    U2 --> U4
+    U3 --> U4
+    
+    style A fill:#e3f2fd
+    style C fill:#f3e5f5
+    style O fill:#e8f5e8
+    style P fill:#fff3e0
+```
 
 #### 标准设备创建流程
 

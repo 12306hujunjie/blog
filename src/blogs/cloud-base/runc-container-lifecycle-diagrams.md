@@ -1,3 +1,20 @@
+---
+title: runc 容器生命周期流程图
+date: 2024-01-20
+tags:
+ - runc
+ - 容器生命周期
+ - 流程图
+ - 架构图
+ - 容器技术
+ - 可视化
+ - 系统设计
+categories: 
+ - cloud-base
+sidebar: auto
+description: 通过详细的流程图和架构图展示runc容器生命周期的各个阶段，包括创建、启动、运行等关键流程
+---
+
 # runc 容器生命周期流程图
 
 ## 1. runc 容器创建总体流程
