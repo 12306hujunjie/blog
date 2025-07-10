@@ -1,1 +1,0 @@
-import{_ as e,c as t,o as a}from"./app-Cb7V6dmb.js";const n={};function o(r,c){return a(),t("div")}const l=e(n,[["render",o]]),i=JSON.parse('{"path":"/tags/wentijiejue/1.html","title":"","lang":"en-US","frontmatter":{"layout":"Categories"},"headers":[],"git":{},"filePathRelative":null}');export{l as comp,i as data};
