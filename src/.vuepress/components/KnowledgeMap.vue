@@ -61,18 +61,40 @@ export default {
     // 加载知识地图数据
     const loadKnowledgeData = async () => {
       try {
+        // 尝试多个可能的数据路径
+        const possibleUrls = [
+          './knowledge-data.json',
+          '/blog/knowledge-data.json',
+          '/knowledge-data.json'
+        ]
+        
         // 动态获取base路径
-        const basePath = document.querySelector('base')?.getAttribute('href') || '/'
-        const dataUrl = `${basePath}knowledge-data.json`.replace('//', '/')
-        const response = await fetch(dataUrl)
-        if (response.ok) {
-          knowledgeData.value = await response.json()
-          articleData.value = knowledgeData.value.articles || []
-        } else {
-          console.warn('无法加载知识地图数据，使用默认数据')
-          // 使用默认数据作为回退
-          articleData.value = getDefaultData()
+        const basePath = document.querySelector('base')?.getAttribute('href')
+        if (basePath) {
+          possibleUrls.unshift(`${basePath}knowledge-data.json`.replace('//', '/'))
         }
+        
+        console.log('尝试加载数据，候选路径:', possibleUrls)
+        
+        for (const url of possibleUrls) {
+          try {
+            const response = await fetch(url)
+            if (response.ok) {
+              const data = await response.json()
+              console.log('成功从', url, '加载数据，节点数量:', data.nodes?.length, '边数量:', data.edges?.length)
+              knowledgeData.value = data
+              articleData.value = data.articles || []
+              return // 成功加载，退出
+            }
+          } catch (urlError) {
+            console.log('尝试', url, '失败:', urlError.message)
+          }
+        }
+        
+        // 所有URL都失败，使用默认数据
+        console.warn('所有数据加载路径都失败，使用默认数据')
+        articleData.value = getDefaultData()
+        
       } catch (error) {
         console.warn('加载知识地图数据失败，使用默认数据:', error)
         articleData.value = getDefaultData()
