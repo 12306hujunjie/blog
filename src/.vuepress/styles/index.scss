@@ -1,0 +1,40 @@
+// Custom styles for the blog
+
+// Mermaid container styles
+.mermaid-container {
+  margin: 1rem 0;
+  padding: 1rem;
+  border: 2px solid #e1e5e9;
+  border-radius: 8px;
+  background-color: #f8f9fa;
+  text-align: center;
+  
+  .mermaid-chart {
+    min-height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    svg {
+      max-width: 100%;
+      height: auto;
+    }
+  }
+}
+
+// Dark mode support
+.dark .mermaid-container {
+  border-color: #4a5568;
+  background-color: #2d3748;
+  
+  .mermaid-chart {
+    color: #e2e8f0;
+  }
+}
+
+// Loading state
+.mermaid-chart:empty::before {
+  content: "Loading Mermaid diagram...";
+  color: #718096;
+  font-style: italic;
+}

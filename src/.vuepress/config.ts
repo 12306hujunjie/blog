@@ -4,12 +4,20 @@
 import recoTheme from 'vuepress-theme-reco'
 import {defineUserConfig} from "vuepress";
 import { viteBundler } from '@vuepress/bundler-vite'
+import { getDirname, path } from '@vuepress/utils'
+import { fileURLToPath } from 'url'
+
+const __dirname = getDirname(import.meta.url)
 
 export default defineUserConfig({
   base: process.env.NODE_ENV === 'production' ? '/blog/' : '/',
   bundler: viteBundler(), 
   title: 'database of memory',
   description: 'study anything and life record',
+  clientConfigFile: path.resolve(__dirname, './client.ts'),
+  plugins: [
+    // Mermaid handled manually via client.ts
+  ],
   theme: recoTheme({
     // style: '@vuepress-reco/style-default',
     logo: '/logo.png',

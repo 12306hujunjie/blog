@@ -157,6 +157,183 @@ func (c *Container) Resume() error {
 }
 ```
 
+### 1.4 暂停/恢复调试追踪流程图
+
+```mermaid
+sequenceDiagram
+    participant CLI as runc CLI
+    participant Container as Container
+    participant CgroupMgr as CgroupManager
+    participant CgroupFS as CgroupFS
+    participant Kernel as Linux Kernel
+    participant Process as Container Process
+
+    Note over CLI: runc pause mycontainer
+    CLI->>Container: Pause()
+    Note right of Container: 调试点 1: 暂停请求接收
+    
+    Container->>Container: currentStatus()
+    alt 状态检查
+        Container->>Container: status == Running/Created
+        Note right of Container: 调试点 2: 状态验证通过
+    else 状态异常
+        Container-->>CLI: ErrNotRunning
+    end
+    
+    Container->>CgroupMgr: Freeze(cgroups.Frozen)
+    Note over CgroupMgr: 调试点 3: Cgroup冻结操作
+    
+    alt Cgroup v1
+        CgroupMgr->>CgroupFS: write FROZEN to freezer.state
+        Note right of CgroupFS: 文件路径: /sys/fs/cgroup/freezer/docker/container_id/freezer.state
+    else Cgroup v2  
+        CgroupMgr->>CgroupFS: write 1 to cgroup.freeze
+        Note right of CgroupFS: 文件路径: /sys/fs/cgroup/docker/container_id/cgroup.freeze
+    end
+    
+    CgroupFS->>Kernel: 通知内核冻结进程组
+    Note right of Kernel: 调试点 4: 内核freezer子系统激活
+    
+    Kernel->>Process: 设置PF_FROZEN标志
+    Kernel->>Process: 发送fake signal唤醒睡眠进程
+    Process->>Process: 检查PF_FROZEN标志
+    Process->>Process: 进入freezer()等待状态
+    Note right of Process: 调试点 5: 进程进入TASK_UNINTERRUPTIBLE状态
+    
+    Container->>Container: state.transition(&pausedState{})
+    Container->>Container: saveState()
+    Note over Container: 调试点 6: 状态持久化为Paused
+    
+    Container-->>CLI: 暂停成功
+    
+    Note over CLI: === 恢复流程 ===
+    Note over CLI: runc resume mycontainer
+    CLI->>Container: Resume()
+    Note right of Container: 调试点 7: 恢复请求接收
+    
+    Container->>CgroupMgr: Freeze(cgroups.Thawed)
+    Note over CgroupMgr: 调试点 8: Cgroup解冻操作
+    
+    alt Cgroup v1
+        CgroupMgr->>CgroupFS: write THAWED to freezer.state
+    else Cgroup v2
+        CgroupMgr->>CgroupFS: write 0 to cgroup.freeze
+    end
+    
+    CgroupFS->>Kernel: 通知内核解冻进程组
+    Note right of Kernel: 调试点 9: 内核清除freezer状态
+    
+    Kernel->>Process: 清除PF_FROZEN标志
+    Process->>Process: 从freezer()返回
+    Process->>Process: 恢复正常执行
+    Note right of Process: 调试点 10: 进程恢复TASK_RUNNING状态
+    
+    Container->>Container: state.transition(&runningState{})
+    Container->>Container: saveState()
+    Note over Container: 调试点 11: 状态恢复为Running
+    
+    Container-->>CLI: 恢复成功
+```
+
+### 1.5 暂停/恢复过程中的特殊情况调试
+
+```mermaid
+graph TD
+    A[暂停状态容器] --> B{接收信号}
+    
+    B -->|SIGKILL| C[检测容器暂停状态]
+    B -->|其他信号| D[信号被阻塞]
+    
+    C --> E[临时解冻容器]
+    E --> F[发送SIGKILL]
+    F --> G[进程终止]
+    
+    D --> H[等待恢复后处理]
+    
+    subgraph DEBUG["调试追踪点"]
+        T1[监控freezer.state变化]
+        T2[进程状态检查: /proc/pid/stat]
+        T3[信号队列状态: /proc/pid/status]
+        T4[cgroup进程列表变化]
+    end
+    
+    I[调试命令示例] --> J[watch cat /sys/fs/cgroup/freezer/.../freezer.state]
+    I --> K[ps axo pid,ppid,state,comm | grep container]
+    I --> L[kill -0 pid # 测试进程是否存活]
+    
+    style A fill:#f9f,stroke:#333,stroke-width:2px
+    style T1 fill:#ff9,stroke:#333,stroke-width:1px
+    style T2 fill:#ff9,stroke:#333,stroke-width:1px
+    style T3 fill:#ff9,stroke:#333,stroke-width:1px
+    style T4 fill:#ff9,stroke:#333,stroke-width:1px
+```
+
+### 1.6 暂停/恢复调试验证脚本
+
+```bash
+#!/bin/bash
+# runc pause/resume 调试验证脚本
+
+CONTAINER_ID="debug-container"
+CGROUP_PATH="/sys/fs/cgroup"
+
+echo "=== 暂停/恢复调试验证 ==="
+
+# 1. 创建并启动容器
+echo "1. 创建容器..."
+runc create $CONTAINER_ID
+runc start $CONTAINER_ID
+
+# 2. 获取容器进程信息
+CONTAINER_PID=$(runc state $CONTAINER_ID | jq -r '.pid')
+echo "容器主进程PID: $CONTAINER_PID"
+
+# 3. 监控容器状态变化
+monitor_container_state() {
+    while true; do
+        STATE=$(ps -o state --no-headers -p $CONTAINER_PID 2>/dev/null || echo "N/A")
+        FREEZER_STATE=$(cat $CGROUP_PATH/freezer/docker/$CONTAINER_ID/freezer.state 2>/dev/null || echo "N/A")
+        RUNC_STATE=$(runc state $CONTAINER_ID | jq -r '.status')
+        
+        echo "$(date '+%H:%M:%S') - PID:$CONTAINER_PID State:$STATE Freezer:$FREEZER_STATE runc:$RUNC_STATE"
+        sleep 1
+    done
+}
+
+# 4. 后台启动状态监控
+monitor_container_state &
+MONITOR_PID=$!
+
+# 5. 执行暂停操作
+echo "2. 暂停容器..."
+sleep 2
+runc pause $CONTAINER_ID
+
+# 6. 验证暂停状态
+echo "3. 验证暂停状态..."
+sleep 3
+
+# 7. 尝试发送信号（应该被阻塞）
+echo "4. 测试信号处理（SIGUSR1）..."
+kill -USR1 $CONTAINER_PID 2>/dev/null && echo "信号发送成功" || echo "信号被阻塞"
+
+# 8. 恢复容器
+echo "5. 恢复容器..."
+sleep 2
+runc resume $CONTAINER_ID
+
+# 9. 验证恢复状态
+echo "6. 验证恢复状态..."
+sleep 3
+
+# 10. 清理
+kill $MONITOR_PID
+runc kill $CONTAINER_ID KILL
+runc delete $CONTAINER_ID
+
+echo "=== 调试验证完成 ==="
+```
+
 ---
 
 ## 2. CRIU检查点/恢复完整流程

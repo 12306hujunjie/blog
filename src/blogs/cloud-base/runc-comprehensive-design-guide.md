@@ -50,19 +50,19 @@ runc 是 Open Container Initiative (OCI) 运行时规范的参考实现，是一
 设计原则（来自 PRINCIPLES.md）:
 ┌─────────────────────────────────────────────────────────────┐
 │ 1. 简单性 (Simplicity)                                     │
-│    "更少的代码更好" - 避免过度设计                          │
+│    '更少的代码更好' - 避免过度设计                          │
 │                                                            │
 │ 2. 可组合性 (Composability)                                │
-│    "成为改进其他工具的组件" - 专注核心功能                  │
+│    '成为改进其他工具的组件' - 专注核心功能                  │
 │                                                            │
 │ 3. 可移植性 (Portability)                                  │
-│    "容器必须能移植到尽可能多的机器" - 广泛兼容性            │
+│    '容器必须能移植到尽可能多的机器' - 广泛兼容性            │
 │                                                            │
 │ 4. 文档化 (Documentation)                                  │
-│    "不文档化就不合并" - 完善的文档                          │
+│    '不文档化就不合并' - 完善的文档                          │
 │                                                            │
 │ 5. 测试 (Testing)                                          │
-│    "不测试就不合并" - 全面的测试覆盖                        │
+│    '不测试就不合并' - 全面的测试覆盖                        │
 └─────────────────────────────────────────────────────────────┘
 ```
 
@@ -787,6 +787,268 @@ cat /proc/<pid>/mounts
 
 # 检查挂载传播
 findmnt -D
+```
+
+### 8.4 错误处理调试追踪流程图
+
+```mermaid
+sequenceDiagram
+    participant CLI as runc CLI
+    participant Factory as Factory
+    participant Container as Container
+    participant Process as initProcess
+    participant CgroupMgr as CgroupManager
+    participant RDTMgr as IntelRDTManager
+    participant Logger as logrus
+
+    Note over CLI: runc create mycontainer
+    CLI->>Factory: Create(id, config)
+    Factory->>Container: newContainer()
+    
+    Container->>Process: newInitProcess()
+    Note right of Process: 调试点 1: 进程初始化
+    
+    Process->>Process: createPipes()
+    alt 管道创建失败
+        Process-->>Container: PipeCreationError
+        Note right of Logger: 错误日志: 'failed to create pipes'
+        Container->>Container: 跳转清理流程
+    end
+    
+    Process->>CgroupMgr: NewManager(config)
+    Note right of CgroupMgr: 调试点 2: Cgroup管理器创建
+    
+    alt Cgroup创建失败
+        CgroupMgr-->>Process: CgroupError
+        Note right of Logger: 错误日志: 'failed to create cgroup manager'
+        Process->>Process: defer清理函数触发
+    end
+    
+    Process->>RDTMgr: NewManager(config)
+    Note right of RDTMgr: 调试点 3: Intel RDT管理器创建
+    
+    Process->>Process: start()
+    Note over Process: 调试点 4: 进程启动阶段
+    
+    alt 容器启动失败
+        Process->>Process: defer func() 执行清理
+        Note right of Process: 调试点 5: 错误清理流程
+        
+        Process->>Process: ignoreTerminateErrors(p.terminate())
+        Note right of Logger: 警告日志: 'unable to terminate initProcess'
+        
+        Process->>CgroupMgr: Destroy()
+        alt Cgroup清理失败
+            CgroupMgr-->>Process: DestroyError
+            Note right of Logger: 警告日志: 'unable to destroy cgroup'
+        end
+        
+        Process->>RDTMgr: Destroy()
+        alt RDT清理失败
+            RDTMgr-->>Process: DestroyError
+            Note right of Logger: 警告日志: 'unable to destroy Intel RDT'
+        end
+        
+        Process-->>Container: 返回原始错误
+        Container-->>CLI: 容器创建失败
+    else 容器启动成功
+        Process->>Process: 正常执行流程
+        Process-->>Container: 成功返回
+        Container-->>CLI: 容器创建成功
+    end
+```
+
+### 8.5 OOM检测和处理调试流程图
+
+```mermaid
+graph TD
+    A[容器运行中] --> B[内存使用增长]
+    B --> C{达到内存限制}
+    
+    C -->|否| B
+    C -->|是| D[内核OOM Killer激活]
+    
+    D --> E[选择牺牲进程]
+    E --> F[发送SIGKILL]
+    F --> G[进程被终止]
+    
+    G --> H[runc检测进程状态]
+    H --> I[调用wait()方法]
+    I --> J[检查OOMKillCount]
+    
+    J --> K{OOM计数 > 0}
+    K -->|是| L[构造OOM错误信息]
+    K -->|否| M[返回正常退出状态]
+    
+    L --> N[返回OOM ExitError]
+    
+    subgraph DEBUG["调试追踪点"]
+        T1[监控memory.usage_in_bytes]
+        T2[检查memory.oom_control]
+        T3[dmesg OOM killer日志]
+        T4[检查进程退出状态]
+    end
+    
+    subgraph COMMANDS["调试命令"]
+        CMD1[watch cat /sys/fs/cgroup/memory/.../memory.usage_in_bytes]
+        CMD2[cat /sys/fs/cgroup/memory/.../memory.oom_control]
+        CMD3[dmesg | grep -i 'killed process']
+        CMD4[runc events container-id]
+    end
+    
+    style A fill:#f9f,stroke:#333,stroke-width:2px
+    style T1 fill:#ff9,stroke:#333,stroke-width:1px
+    style T2 fill:#ff9,stroke:#333,stroke-width:1px
+    style T3 fill:#ff9,stroke:#333,stroke-width:1px
+    style T4 fill:#ff9,stroke:#333,stroke-width:1px
+```
+
+### 8.6 权限和安全错误调试流程图
+
+```mermaid
+sequenceDiagram
+    participant Process as Container Process
+    participant Kernel as Linux Kernel
+    participant CapMgr as Capabilities Manager
+    participant SeccompMgr as Seccomp Manager
+    participant UserNS as User Namespace
+
+    Note over Process: 安全策略应用阶段
+    Process->>CapMgr: setupCapabilities()
+    Note right of CapMgr: 调试点 1: 权限设置
+    
+    CapMgr->>Kernel: capset(&header, &data)
+    alt 权限设置失败
+        Kernel-->>CapMgr: EPERM错误
+        Note right of CapMgr: 调试点 2: 权限不足
+        CapMgr-->>Process: CapabilityError
+    end
+    
+    Process->>UserNS: setupUserNamespace()
+    Note right of UserNS: 调试点 3: 用户命名空间配置
+    
+    UserNS->>Kernel: write uid_map/gid_map
+    alt 映射设置失败
+        Kernel-->>UserNS: EINVAL错误
+        Note right of UserNS: 调试点 4: 映射配置错误
+        UserNS-->>Process: MappingError
+    end
+    
+    Process->>SeccompMgr: setupSeccomp()
+    Note right of SeccompMgr: 调试点 5: Seccomp过滤器设置
+    
+    SeccompMgr->>Kernel: prctl(PR_SET_SECCOMP, ...)
+    alt Seccomp设置失败
+        Kernel-->>SeccompMgr: EINVAL错误
+        Note right of SeccompMgr: 调试点 6: 过滤器配置错误
+        SeccompMgr-->>Process: SeccompError
+    end
+    
+    Note over Process: === 运行时错误检测 ===
+    Process->>Kernel: 执行系统调用
+    alt Seccomp阻止
+        Kernel->>Process: SIGSYS信号
+        Note right of Process: 调试点 7: 系统调用被阻止
+    else 权限不足
+        Kernel-->>Process: EPERM错误
+        Note right of Process: 调试点 8: 权限检查失败
+    end
+```
+
+### 8.7 综合错误诊断调试脚本
+
+```bash
+#!/bin/bash
+# runc 错误诊断综合调试脚本
+
+CONTAINER_ID=${1:-"debug-container"}
+DEBUG_LOG="/tmp/runc-debug-${CONTAINER_ID}.log"
+
+echo "=== runc 错误诊断调试工具 ===" | tee $DEBUG_LOG
+echo "容器ID: $CONTAINER_ID" | tee -a $DEBUG_LOG
+echo "时间: $(date)" | tee -a $DEBUG_LOG
+echo "" | tee -a $DEBUG_LOG
+
+# 1. 检查容器状态
+echo "1. 容器状态检查:" | tee -a $DEBUG_LOG
+runc state $CONTAINER_ID 2>&1 | tee -a $DEBUG_LOG || echo "容器状态获取失败" | tee -a $DEBUG_LOG
+echo "" | tee -a $DEBUG_LOG
+
+# 2. 获取容器PID
+CONTAINER_PID=$(runc state $CONTAINER_ID 2>/dev/null | jq -r '.pid // empty')
+if [[ -n "$CONTAINER_PID" && "$CONTAINER_PID" != "null" ]]; then
+    echo "容器主进程PID: $CONTAINER_PID" | tee -a $DEBUG_LOG
+    
+    # 3. 检查进程状态
+    echo "2. 进程状态检查:" | tee -a $DEBUG_LOG
+    ps -f -p $CONTAINER_PID 2>&1 | tee -a $DEBUG_LOG || echo "进程不存在" | tee -a $DEBUG_LOG
+    echo "" | tee -a $DEBUG_LOG
+    
+    # 4. 检查命名空间
+    echo "3. 命名空间检查:" | tee -a $DEBUG_LOG
+    ls -la /proc/$CONTAINER_PID/ns/ 2>&1 | tee -a $DEBUG_LOG || echo "命名空间信息获取失败" | tee -a $DEBUG_LOG
+    echo "" | tee -a $DEBUG_LOG
+    
+    # 5. 检查权限和能力
+    echo "4. 权限能力检查:" | tee -a $DEBUG_LOG
+    echo "用户映射:" | tee -a $DEBUG_LOG
+    cat /proc/$CONTAINER_PID/uid_map 2>&1 | tee -a $DEBUG_LOG || echo "UID映射获取失败" | tee -a $DEBUG_LOG
+    cat /proc/$CONTAINER_PID/gid_map 2>&1 | tee -a $DEBUG_LOG || echo "GID映射获取失败" | tee -a $DEBUG_LOG
+    echo "进程能力:" | tee -a $DEBUG_LOG
+    grep Cap /proc/$CONTAINER_PID/status 2>&1 | tee -a $DEBUG_LOG || echo "能力信息获取失败" | tee -a $DEBUG_LOG
+    echo "" | tee -a $DEBUG_LOG
+    
+    # 6. 检查Seccomp状态
+    echo "5. Seccomp状态检查:" | tee -a $DEBUG_LOG
+    grep Seccomp /proc/$CONTAINER_PID/status 2>&1 | tee -a $DEBUG_LOG || echo "Seccomp状态获取失败" | tee -a $DEBUG_LOG
+    echo "" | tee -a $DEBUG_LOG
+else
+    echo "无法获取容器PID，跳过进程相关检查" | tee -a $DEBUG_LOG
+fi
+
+# 7. 检查Cgroup状态
+echo "6. Cgroup状态检查:" | tee -a $DEBUG_LOG
+CGROUP_PATHS=(
+    "/sys/fs/cgroup/memory/docker/$CONTAINER_ID"
+    "/sys/fs/cgroup/cpu/docker/$CONTAINER_ID"
+    "/sys/fs/cgroup/freezer/docker/$CONTAINER_ID"
+    "/sys/fs/cgroup/docker/$CONTAINER_ID"  # cgroup v2
+)
+
+for path in "${CGROUP_PATHS[@]}"; do
+    if [[ -d "$path" ]]; then
+        echo "Cgroup路径: $path" | tee -a $DEBUG_LOG
+        echo "内存使用:" | tee -a $DEBUG_LOG
+        cat $path/memory.usage_in_bytes 2>/dev/null | tee -a $DEBUG_LOG || \
+        cat $path/memory.current 2>/dev/null | tee -a $DEBUG_LOG || \
+        echo "内存信息获取失败" | tee -a $DEBUG_LOG
+        
+        echo "CPU统计:" | tee -a $DEBUG_LOG
+        cat $path/cpu.stat 2>/dev/null | head -5 | tee -a $DEBUG_LOG || \
+        cat $path/cpuacct.usage 2>/dev/null | tee -a $DEBUG_LOG || \
+        echo "CPU信息获取失败" | tee -a $DEBUG_LOG
+        break
+    fi
+done
+echo "" | tee -a $DEBUG_LOG
+
+# 8. 检查最近的dmesg错误
+echo "7. 系统日志检查 (最近5分钟):" | tee -a $DEBUG_LOG
+dmesg -T | awk -v container="$CONTAINER_ID" -v since="$(date -d '5 minutes ago' '+%Y-%m-%d %H:%M')" \
+    '$0 >= since && ($0 ~ /oom-killer/ || $0 ~ /segfault/ || $0 ~ /killed process/ || $0 ~ container)' \
+    2>&1 | tee -a $DEBUG_LOG || echo "dmesg信息获取失败" | tee -a $DEBUG_LOG
+echo "" | tee -a $DEBUG_LOG
+
+# 9. 检查runc日志
+echo "8. runc 详细日志:" | tee -a $DEBUG_LOG
+echo "执行以下命令获取详细调试信息:" | tee -a $DEBUG_LOG
+echo "runc --debug state $CONTAINER_ID" | tee -a $DEBUG_LOG
+echo "runc --debug events $CONTAINER_ID" | tee -a $DEBUG_LOG
+echo "" | tee -a $DEBUG_LOG
+
+echo "=== 调试报告完成 ===" | tee -a $DEBUG_LOG
+echo "详细日志保存在: $DEBUG_LOG" | tee -a $DEBUG_LOG
+```
 ```
 
 #### 网络问题

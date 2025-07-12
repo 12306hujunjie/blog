@@ -17,6 +17,7 @@
     "vuepress": "2.0.0-rc.19",
     "vuepress-theme-reco": "2.0.0-rc.26", 
     "@vuepress/bundler-vite": "2.0.0-rc.19",
-    "gray-matter": "^4.0.3"
+    "gray-matter": "^4.0.3",
+    "mermaid": "^11.4.1"
   }
 }
