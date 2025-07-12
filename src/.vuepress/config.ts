@@ -6,6 +6,7 @@ import {defineUserConfig} from "vuepress";
 import { viteBundler } from '@vuepress/bundler-vite'
 import { getDirname, path } from '@vuepress/utils'
 import { fileURLToPath } from 'url'
+// import { mermaidPlugin } from './plugins/mermaid-plugin.js'
 
 const __dirname = getDirname(import.meta.url)
 
@@ -14,9 +15,13 @@ export default defineUserConfig({
   bundler: viteBundler(), 
   title: 'database of memory',
   description: 'study anything and life record',
-  clientConfigFile: path.resolve(__dirname, './client.ts'),
+  head: [
+    // Preload Mermaid for better performance in static builds
+    ['link', { rel: 'preload', href: 'https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.min.js', as: 'script' }],
+  ],
+  clientConfigFile: path.resolve(__dirname, './client-mermaid.ts'),
   plugins: [
-    // Mermaid handled manually via client.ts
+    // mermaidPlugin(),
   ],
   theme: recoTheme({
     // style: '@vuepress-reco/style-default',
