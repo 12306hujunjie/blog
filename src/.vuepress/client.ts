@@ -6,8 +6,23 @@ export default defineClientConfig({
     app.component('MermaidChart', MermaidChart)
   },
   setup() {
-    // Process mermaid code blocks after page is mounted
+    // Combined setup function
     if (typeof window !== 'undefined') {
+      // Handle Valine component errors gracefully
+      window.addEventListener('error', (event) => {
+        if (event.message && event.message.includes('Valine')) {
+          console.warn('Valine component error caught:', event.message);
+          event.preventDefault();
+          
+          // Hide Valine container if there's an error
+          const valineElements = document.querySelectorAll('.valine-wrapper');
+          valineElements.forEach(el => {
+            el.classList.add('error');
+          });
+        }
+      });
+      
+      // Process mermaid code blocks after page is mounted
       const processMermaidBlocks = () => {
         console.log('🔍 Starting Mermaid processing...')
         
@@ -69,11 +84,40 @@ export default defineClientConfig({
         console.log('✅ Mermaid processing completed')
       }
       
+      const loadMermaid = () => {
+        return new Promise((resolve, reject) => {
+          // Check if mermaid is already loaded
+          if (window.mermaid) {
+            resolve(window.mermaid)
+            return
+          }
+          
+          // Try dynamic import first (works in dev)
+          import('mermaid').then((mermaidModule) => {
+            const mermaid = mermaidModule.default
+            window.mermaid = mermaid
+            resolve(mermaid)
+          }).catch(() => {
+            // Fallback to CDN for static builds
+            console.log('📡 Loading Mermaid from CDN...')
+            const script = document.createElement('script')
+            script.src = 'https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.min.js'
+            script.onload = () => {
+              console.log('📦 Mermaid loaded from CDN')
+              resolve(window.mermaid)
+            }
+            script.onerror = () => {
+              reject(new Error('Failed to load Mermaid from CDN'))
+            }
+            document.head.appendChild(script)
+          })
+        })
+      }
+
       const renderMermaidChart = (elementId, code) => {
         console.log(`🎨 Attempting to render chart: ${elementId}`)
         
-        import('mermaid').then((mermaidModule) => {
-          const mermaid = mermaidModule.default
+        loadMermaid().then((mermaid) => {
           console.log(`📦 Mermaid module loaded successfully`)
           
           mermaid.initialize({
@@ -109,7 +153,7 @@ export default defineClientConfig({
             console.error(`❌ Chart element not found: ${elementId}`)
           }
         }).catch((error) => {
-          console.error('❌ Failed to load mermaid module:', error)
+          console.error('❌ Failed to load mermaid:', error)
           const chartElement = document.getElementById(elementId)
           if (chartElement) {
             chartElement.innerHTML = `<div style="border: 2px solid orange; padding: 1rem; background: #fff3cd;">
@@ -124,11 +168,34 @@ export default defineClientConfig({
       setTimeout(processMermaidBlocks, 500)
       setTimeout(processMermaidBlocks, 1000)
       
-      // Process on route changes
+      // Process on DOM changes and route changes
       if (!window.__VUEPRESS_SSR__) {
+        // Handle SPA route changes
         window.addEventListener('popstate', () => {
           setTimeout(processMermaidBlocks, 100)
         })
+        
+        // Handle hash changes
+        window.addEventListener('hashchange', () => {
+          setTimeout(processMermaidBlocks, 100)
+        })
+        
+        // Observe DOM changes for new content
+        const observer = new MutationObserver(() => {
+          setTimeout(processMermaidBlocks, 50)
+        })
+        
+        // Start observing after a delay to avoid initial load conflicts
+        setTimeout(() => {
+          const targetNode = document.body
+          if (targetNode) {
+            observer.observe(targetNode, {
+              childList: true,
+              subtree: true,
+              attributes: false
+            })
+          }
+        }, 2000)
       }
     }
   }

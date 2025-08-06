@@ -6,7 +6,7 @@ import {defineUserConfig} from "vuepress";
 import { viteBundler } from '@vuepress/bundler-vite'
 import { getDirname, path } from '@vuepress/utils'
 import { fileURLToPath } from 'url'
-// import { mermaidPlugin } from './plugins/mermaid-plugin.js'
+import { mermaidPlugin } from './plugins/mermaid-plugin.js'
 
 const __dirname = getDirname(import.meta.url)
 
@@ -21,7 +21,7 @@ export default defineUserConfig({
   ],
   clientConfigFile: path.resolve(__dirname, './client-mermaid.ts'),
   plugins: [
-    // mermaidPlugin(),
+    mermaidPlugin(),
   ],
   theme: recoTheme({
     // style: '@vuepress-reco/style-default',

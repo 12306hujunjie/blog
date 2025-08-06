@@ -1,0 +1,77 @@
+/* Mermaid Diagram Styles */
+.mermaid-wrapper {
+  margin: 1.5rem 0;
+  overflow: auto;
+}
+
+.mermaid-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100px;
+  background: #f9f9f9;
+  border-radius: 8px;
+  padding: 1rem;
+}
+
+/* Loading state */
+.mermaid-loading {
+  color: #666;
+  font-style: italic;
+}
+
+/* Rendered state */
+.mermaid-rendered {
+  background: white;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* Error state */
+.mermaid-error-state {
+  background: #fff5f5;
+  border: 1px solid #ff6b6b;
+}
+
+.mermaid-error {
+  color: #c92a2a;
+  padding: 1rem;
+}
+
+.mermaid-error h4 {
+  margin-top: 0;
+  color: #a61e4d;
+}
+
+.mermaid-error details {
+  margin-top: 1rem;
+}
+
+.mermaid-error pre {
+  background: #f8f9fa;
+  padding: 0.5rem;
+  border-radius: 4px;
+  overflow-x: auto;
+}
+
+/* Dark mode support */
+html.dark .mermaid-container {
+  background: #1e1e1e;
+}
+
+html.dark .mermaid-rendered {
+  background: #2d2d2d;
+  box-shadow: 0 2px 4px rgba(255,255,255,0.1);
+}
+
+html.dark .mermaid-error-state {
+  background: #2a1f1f;
+  border-color: #ff8787;
+}
+
+html.dark .mermaid-error {
+  color: #ff8787;
+}
+
+html.dark .mermaid-error h4 {
+  color: #ffa8a8;
+}

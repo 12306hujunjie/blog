@@ -46,14 +46,13 @@ export default defineClientConfig({
       const renderAllMermaidDiagrams = async () => {
         console.log('🔍 Processing Mermaid diagrams...')
         
-        // 查找标准的mermaid代码块
+        // 查找由插件处理的 mermaid 容器
+        const mermaidContainers = document.querySelectorAll('.mermaid-container[data-mermaid-code]:not(.mermaid-processed)')
+        
+        // 也查找标准的mermaid代码块
         const codeBlocks = document.querySelectorAll('div.language-mermaid:not(.mermaid-processed)')
         
-        if (codeBlocks.length === 0) {
-          return
-        }
-        
-        console.log(`📊 Found ${codeBlocks.length} mermaid code blocks to render`)
+        console.log(`📊 Found ${mermaidContainers.length} plugin containers, ${codeBlocks.length} code blocks`)
         
         try {
           const mermaid = await loadMermaid()
@@ -64,6 +63,35 @@ export default defineClientConfig({
             securityLevel: 'loose',
           })
           
+          // 处理插件生成的容器
+          for (let i = 0; i < mermaidContainers.length; i++) {
+            const container = mermaidContainers[i] as HTMLElement
+            const encodedCode = container.getAttribute('data-mermaid-code')
+            
+            if (!encodedCode) continue
+            
+            const code = decodeURIComponent(encodedCode)
+            const id = container.id || `mermaid-${Math.random().toString(36).substr(2, 9)}`
+            
+            console.log(`🎨 Rendering plugin container: ${id}`)
+            
+            try {
+              const { svg } = await mermaid.render(`${id}-svg`, code)
+              container.innerHTML = svg
+              container.classList.add('mermaid-processed', 'mermaid-rendered')
+              console.log(`✅ Successfully rendered: ${id}`)
+            } catch (error) {
+              console.error(`❌ Failed to render ${id}:`, error)
+              container.innerHTML = `
+                <div class="mermaid-error">
+                  <h4>渲染错误</h4>
+                  <p>${error.message}</p>
+                </div>`
+              container.classList.add('mermaid-processed', 'mermaid-error-state')
+            }
+          }
+          
+          // 处理标准代码块
           for (let i = 0; i < codeBlocks.length; i++) {
             const codeBlock = codeBlocks[i] as HTMLElement
             const codeElement = codeBlock.querySelector('pre code')
@@ -73,8 +101,7 @@ export default defineClientConfig({
             const code = codeElement.textContent?.trim() || ''
             const id = `mermaid-${Math.random().toString(36).substr(2, 9)}`
             
-            console.log(`🎨 Rendering diagram: ${id}`)
-            console.log(`📄 Code:`, code.slice(0, 50) + '...')
+            console.log(`🎨 Rendering code block: ${id}`)
             
             try {
               const { svg } = await mermaid.render(`${id}-svg`, code)
@@ -99,12 +126,7 @@ export default defineClientConfig({
                 <div class="mermaid-container mermaid-error-state">
                   <div class="mermaid-error">
                     <h4>Mermaid Rendering Error</h4>
-                    <p><strong>ID:</strong> ${id}</p>
                     <p><strong>Error:</strong> ${error.message}</p>
-                    <details>
-                      <summary>Original Code</summary>
-                      <pre><code>${code}</code></pre>
-                    </details>
                   </div>
                 </div>`
               

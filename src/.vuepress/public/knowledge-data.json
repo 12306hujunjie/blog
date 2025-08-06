@@ -219,6 +219,22 @@
       "date": "2023-04-24T00:00:00.000Z"
     },
     {
+      "id": "python-async-mastery",
+      "label": "Python 异步编程完全指南：从原理到实战优化",
+      "title": "分类: programming\n标签: Python, 异步编程, asyncio, 性能优化, 并发\n点击查看详情",
+      "color": "#95a5a6",
+      "category": "programming",
+      "tags": [
+        "Python",
+        "异步编程",
+        "asyncio",
+        "性能优化",
+        "并发"
+      ],
+      "path": "/blogs/programming/python/python-async-mastery.html",
+      "date": "2024-01-01T00:00:00.000Z"
+    },
+    {
       "id": "python_checklist",
       "label": "python checklist",
       "title": "分类: python\n标签: python, 代码规范, 开发规范, pep8, 工程实践, 入门级, 开发工具\n点击查看详情",
@@ -285,6 +301,20 @@
         "学习资料"
       ],
       "path": "/docs/README.html",
+      "date": "2024-01-01T00:00:00.000Z"
+    },
+    {
+      "id": "fullstack",
+      "label": "全栈工程师学习路线图 2024",
+      "title": "分类: roadmaps\n标签: 学习路径, 全栈开发, 职业规划\n点击查看详情",
+      "color": "#95a5a6",
+      "category": "roadmaps",
+      "tags": [
+        "学习路径",
+        "全栈开发",
+        "职业规划"
+      ],
+      "path": "/docs/roadmaps/fullstack.html",
       "date": "2024-01-01T00:00:00.000Z"
     }
   ],
@@ -971,6 +1001,21 @@
       ]
     },
     {
+      "from": "python-async-mastery",
+      "to": "gevent",
+      "weight": 6,
+      "width": 5,
+      "length": 80,
+      "commonTags": [
+        "异步编程",
+        "性能优化"
+      ],
+      "meaningfulTags": [
+        "异步编程",
+        "性能优化"
+      ]
+    },
+    {
       "from": "python_checklist",
       "to": "python_env_manage",
       "weight": 13,
@@ -1222,6 +1267,21 @@
       "description": ""
     },
     {
+      "id": "python-async-mastery",
+      "title": "Python 异步编程完全指南：从原理到实战优化",
+      "category": "programming",
+      "tags": [
+        "Python",
+        "异步编程",
+        "asyncio",
+        "性能优化",
+        "并发"
+      ],
+      "date": "2024-01-01T00:00:00.000Z",
+      "path": "/blogs/programming/python/python-async-mastery.html",
+      "description": ""
+    },
+    {
       "id": "python_checklist",
       "title": "python checklist",
       "category": "python",
@@ -1285,6 +1345,19 @@
       "date": "2024-01-01T00:00:00.000Z",
       "path": "/docs/README.html",
       "description": "技术文档和学习资料的集中展示页面"
+    },
+    {
+      "id": "fullstack",
+      "title": "全栈工程师学习路线图 2024",
+      "category": "roadmaps",
+      "tags": [
+        "学习路径",
+        "全栈开发",
+        "职业规划"
+      ],
+      "date": "2024-01-01T00:00:00.000Z",
+      "path": "/docs/roadmaps/fullstack.html",
+      "description": "从零到全栈工程师的完整学习路径，包含前端、后端、DevOps等技术栈的系统化学习指南"
     }
   ]
 }
