@@ -1,3 +1,15 @@
+---
+title: CRIU 检查点与恢复
+date: 2025-08-07
+tags:
+ - runc
+ - 云原生
+ - CRIU
+categories:
+ - 云原生
+sidebar: auto
+---
+
 # CRIU 检查点与恢复
 
 > **系列导航：** [runc 容器运行时深度解析系列](./README.md) → 第七篇：CRIU 检查点与恢复  

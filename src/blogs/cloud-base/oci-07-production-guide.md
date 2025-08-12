@@ -1,3 +1,15 @@
+---
+title: OCI 容器生产环境实践案例
+date: 2024-02-07
+tags:
+ - OCI
+ - 云原生
+ - 生产实践
+categories:
+ - 云原生
+sidebar: auto
+---
+
 # OCI 容器生产环境实践案例
 
 > **系列导航：** [OCI 容器技术完全指南系列](./oci-series-index.md) → 第七篇：生产实践  

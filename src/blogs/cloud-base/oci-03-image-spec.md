@@ -1,3 +1,15 @@
+---
+title: OCI Image 规范详解 - 容器镜像格式与构建
+date: 2024-02-03
+tags:
+ - OCI
+ - 云原生
+ - 镜像规范
+categories:
+ - 云原生
+sidebar: auto
+---
+
 # OCI Image 规范详解 - 容器镜像格式与构建
 
 > **系列导航：** [OCI 容器技术完全指南系列](./oci-series-index.md) → 第三篇：镜像规范  

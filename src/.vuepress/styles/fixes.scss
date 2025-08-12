@@ -1,0 +1,141 @@
+// Mobile responsiveness fixes
+@media (max-width: 767px) {
+  // Prevent horizontal scrolling
+  body {
+    overflow-x: hidden;
+  }
+  
+  .theme-container {
+    overflow-x: hidden;
+  }
+  
+  // Fix wide content
+  pre {
+    overflow-x: auto;
+    max-width: 100%;
+  }
+  
+  // Fix table responsiveness
+  table {
+    display: block;
+    overflow-x: auto;
+    max-width: 100%;
+  }
+  
+  // Fix code blocks
+  .language-mermaid,
+  .mermaid-wrapper,
+  .mermaid-container {
+    max-width: 100%;
+    overflow-x: auto;
+  }
+  
+  // Fix images
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  // Fix navigation dropdowns
+  .navbar-dropdown {
+    position: relative;
+    width: 100%;
+    
+    .dropdown-wrapper {
+      position: static;
+      
+      .dropdown-list {
+        position: relative;
+        width: 100%;
+        box-shadow: none;
+        border: 1px solid var(--border-color);
+        margin-top: 0.5rem;
+      }
+    }
+  }
+}
+
+// Accessibility improvements
+img[src*="cyberSecurityRecord"] {
+  // Add visual indicator for missing alt
+  &:not([alt]) {
+    outline: 2px dashed red;
+  }
+}
+
+// Mermaid diagram improvements
+.mermaid-wrapper {
+  margin: 1.5rem 0;
+  
+  .mermaid-container {
+    background: white;
+    padding: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    
+    &.mermaid-rendered {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow-x: auto;
+      
+      svg {
+        max-width: 100%;
+        height: auto;
+      }
+    }
+    
+    &.mermaid-error-state {
+      background: #fff5f5;
+      border: 1px solid #ff6b6b;
+      color: #c92a2a;
+      
+      .mermaid-error {
+        padding: 1rem;
+        
+        h4 {
+          margin-top: 0;
+          color: #a61e4d;
+        }
+      }
+    }
+    
+    .mermaid-loading {
+      text-align: center;
+      color: #666;
+      font-style: italic;
+      padding: 2rem;
+    }
+  }
+}
+
+// Dark mode support for Mermaid
+html.dark {
+  .mermaid-container {
+    background: #2d2d2d;
+    
+    &.mermaid-error-state {
+      background: #2a1f1f;
+      border-color: #ff8787;
+      color: #ff8787;
+      
+      .mermaid-error h4 {
+        color: #ffa8a8;
+      }
+    }
+  }
+}
+
+// Fix Vue warning for Valine comments
+.valine-wrapper {
+  min-height: 200px;
+  
+  &.loading {
+    opacity: 0.5;
+  }
+  
+  // Hide if there's an error
+  &.error {
+    display: none;
+  }
+}

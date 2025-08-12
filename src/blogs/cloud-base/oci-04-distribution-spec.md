@@ -1,3 +1,15 @@
+---
+title: OCI Distribution 规范详解 - 容器镜像分发协议
+date: 2024-02-04
+tags:
+ - OCI
+ - 云原生
+ - 分发规范
+categories:
+ - 云原生
+sidebar: auto
+---
+
 # OCI Distribution 规范详解 - 容器镜像分发协议
 
 > **系列导航：** [OCI 容器技术完全指南系列](./oci-series-index.md) → 第四篇：分发规范  

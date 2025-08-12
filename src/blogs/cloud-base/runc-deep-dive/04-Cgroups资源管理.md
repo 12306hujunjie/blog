@@ -1,3 +1,15 @@
+---
+title: Cgroups 资源管理
+date: 2025-08-04
+tags:
+ - runc
+ - 云原生
+ - Cgroups
+categories:
+ - 云原生
+sidebar: auto
+---
+
 # Cgroups 资源管理
 
 > **系列导航：** [runc 容器运行时深度解析系列](./README.md) → 第四篇：Cgroups 资源管理  

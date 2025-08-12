@@ -3,14 +3,10 @@ title: OCI Linux 容器配置规范与接口完全指南
 date: 2024-01-05
 tags:
  - OCI
- - Linux容器
- - 配置规范
- - 接口设计
- - 容器技术
  - 云原生
- - 标准化
+ - Linux配置
 categories: 
- - cloud-base
+ - 云原生
 sidebar: auto
 description: 深入解析OCI规范中的Linux相关配置选项和接口定义，涵盖运行时配置、资源管理、安全机制等核心内容
 ---

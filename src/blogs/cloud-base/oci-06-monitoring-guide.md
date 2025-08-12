@@ -1,3 +1,15 @@
+---
+title: OCI 容器监控调试与故障排除
+date: 2024-02-06
+tags:
+ - OCI
+ - 云原生
+ - 监控
+categories:
+ - 云原生
+sidebar: auto
+---
+
 # OCI 容器监控调试与故障排除
 
 > **系列导航：** [OCI 容器技术完全指南系列](./oci-series-index.md) → 第六篇：监控调试  

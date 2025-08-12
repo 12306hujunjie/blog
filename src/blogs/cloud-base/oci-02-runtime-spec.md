@@ -1,3 +1,15 @@
+---
+title: OCI Runtime 规范详解 - Linux 容器配置完全指南
+date: 2024-02-02
+tags:
+ - OCI
+ - 云原生
+ - Runtime规范
+categories:
+ - 云原生
+sidebar: auto
+---
+
 # OCI Runtime 规范详解 - Linux 容器配置完全指南
 
 > **系列导航：** [OCI 容器技术完全指南系列](./oci-series-index.md) → 第二篇：运行时规范  

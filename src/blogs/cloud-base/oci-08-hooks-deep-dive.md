@@ -1,3 +1,15 @@
+---
+title: OCI Hook 系统深度解析 - 容器生命周期扩展机制
+date: 2024-02-08
+tags:
+ - OCI
+ - 云原生
+ - Hook系统
+categories:
+ - 云原生
+sidebar: auto
+---
+
 # OCI Hook 系统深度解析 - 容器生命周期扩展机制
 
 > **系列导航：** [OCI 容器技术完全指南系列](./oci-series-index.md) → 第八篇：Hook 系统深度解析  

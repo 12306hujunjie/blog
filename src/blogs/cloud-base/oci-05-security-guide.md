@@ -1,3 +1,15 @@
+---
+title: OCI 容器安全配置实战
+date: 2024-02-05
+tags:
+ - OCI
+ - 云原生
+ - 安全
+categories:
+ - 云原生
+sidebar: auto
+---
+
 # OCI 容器安全配置实战
 
 > **系列导航：** [OCI 容器技术完全指南系列](./oci-series-index.md) → 第五篇：安全实战  

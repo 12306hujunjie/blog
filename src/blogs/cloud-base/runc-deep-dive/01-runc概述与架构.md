@@ -1,3 +1,15 @@
+---
+title: runc 概述与架构
+date: 2025-08-01
+tags:
+ - runc
+ - 云原生
+ - 架构设计
+categories:
+ - 云原生
+sidebar: auto
+---
+
 # runc 概述与架构
 
 > **系列导航：** [runc 容器运行时深度解析系列](./README.md) → 第一篇：概述与架构  

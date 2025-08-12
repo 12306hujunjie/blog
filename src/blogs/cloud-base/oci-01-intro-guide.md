@@ -1,3 +1,15 @@
+---
+title: OCI 容器技术入门指南
+date: 2024-02-01
+tags:
+ - OCI
+ - 云原生
+ - 入门
+categories:
+ - 云原生
+sidebar: auto
+---
+
 # OCI 容器技术入门指南
 
 > **系列导航：** [OCI 容器技术完全指南系列](./oci-series-index.md) → 第一篇：基础入门  
