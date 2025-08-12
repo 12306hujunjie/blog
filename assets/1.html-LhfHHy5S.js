@@ -1,0 +1,1 @@
+import{_ as t,c as e,o as a}from"./app-6X7aTgdN.js";const n={};function c(o,r){return a(),e("div")}const l=t(n,[["render",c]]),i=JSON.parse('{"path":"/tags/shengchanshijian/1.html","title":"","lang":"en-US","frontmatter":{"layout":"Categories"},"headers":[],"git":{},"filePathRelative":null}');export{l as comp,i as data};

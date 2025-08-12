@@ -1,0 +1,1 @@
+import{_ as e,c as t,o as a}from"./app-6X7aTgdN.js";const n={};function o(r,c){return a(),t("div")}const l=e(n,[["render",o]]),i=JSON.parse('{"path":"/tags/xiliewendang/1.html","title":"","lang":"en-US","frontmatter":{"layout":"Categories"},"headers":[],"git":{},"filePathRelative":null}');export{l as comp,i as data};
